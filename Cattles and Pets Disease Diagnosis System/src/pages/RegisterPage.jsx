@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import NavBar2 from "../components/NavBar2"
-import Home from "../assets/Home.webp"
-;
+import NavBar2 from "../components/NavBar2";
+import Home from "../assets/Home.webp";
 
 function Register() {
   const initialState = {
@@ -19,6 +18,7 @@ function Register() {
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
+    role: "user",
     password: "",
     passwordConfirm: "",
   });
@@ -115,7 +115,6 @@ function Register() {
   return (
     <div>
       <NavBar2 />
-
       <div
         style={{
           backgroundImage: `url(${Home})`,
@@ -176,6 +175,21 @@ function Register() {
                         Enter a valid email address.
                       </span>
                     )}
+                  </div>
+
+                  <div className="form-group mb-4">
+                    <label className="block text-gray-700 font-semibold">
+                      Identity
+                    </label>
+                    <select
+                      name="role"
+                      onChange={handleInput}
+                      value={inputs.role}
+                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                    >
+                      <option value="English">User</option>
+                      <option value="Spanish">Veternarian</option>
+                    </select>
                   </div>
 
                   <div className="form-group mb-4">

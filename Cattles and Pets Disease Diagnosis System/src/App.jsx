@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import ForgotPass from "./pages/ForgotPass";
 import ResetPassword from "./pages/ResetPass";
+import UserDetailsRegister from "./pages/UserdetailsRegister";
+import VetDoctorDetailsRegister from "./pages/DoctorDetailsRegister";
 
 export default function App() {
   return (
@@ -15,6 +17,9 @@ export default function App() {
           <Route path="/register" element={<Register/>}/>
           <Route path="/forgotPassword" element={<ForgotPass/>}/>
           <Route path="/resetPassword/:token" element={<ResetPassword/>}/>
+          <Route path="/userDetailsRegister" element={<UserDetailsRegister/>}/>
+          <Route path="/vetDoctorDetailsRegister" element={<VetDoctorDetailsRegister/>}/>
+
 
         </Routes>
       </BrowserRouter>
