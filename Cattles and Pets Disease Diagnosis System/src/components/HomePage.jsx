@@ -1,6 +1,8 @@
 import EmojiNatureSharpIcon from "@mui/icons-material/EmojiNatureSharp";
 import NavBarMobile from "./NavBarMobile";
 import NavBar from "./NavBar";
+import Home from "../assets/Home.webp"
+import { Link } from "react-router-dom";
 function HomePage() {
   return (
     <div>
@@ -15,7 +17,7 @@ function HomePage() {
         className="hero min-h-screen "
         style={{
           backgroundImage:
-            "url(https://github.com/Gowtham-G29/Cattles-and-Pets-Disease-Diagnosis-System-Frontend/blob/6eae42a802813f48f63f9a082f7b5e2175295ab3/Cattles%20and%20Pets%20Disease%20Diagnosis%20System/src/assets/hero.jpeg)",
+            `url(${Home})`,
         }}
 
       >
@@ -27,12 +29,15 @@ function HomePage() {
               &quot;Compassion for Every Paw and Hoof – Caring Beyond
               Boundaries!&quot;
             </p>
+            <Link to="/register">
             <button className="btn btn-primary">
               <div className="flex ">
                 <EmojiNatureSharpIcon fontSize="medium" />
               </div>
               Diagnos Your Favourites
             </button>
+            </Link>
+          
           </div>
         </div>
       </div>

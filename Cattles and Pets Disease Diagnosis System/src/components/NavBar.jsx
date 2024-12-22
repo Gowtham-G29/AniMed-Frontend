@@ -13,7 +13,7 @@ function NavBar() {
         </div>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-10 flex ">
+        <ul className="menu menu-horizontal px-5 flex ">
           <div className="flex mt-1.3  mr-2 text-lg  font-bold">
             <li>
               <a>About</a>

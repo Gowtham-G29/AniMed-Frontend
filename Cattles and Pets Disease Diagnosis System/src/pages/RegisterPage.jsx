@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-
+import NavBar2 from "../components/NavBar2"
+import Home from "../assets/Home.webp"
+;
 
 function Register() {
   const initialState = {
@@ -21,7 +23,7 @@ function Register() {
     passwordConfirm: "",
   });
 
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -112,148 +114,157 @@ function Register() {
 
   return (
     <div>
-      <section className="register-block py-20 bg-hero-pattern min-h-screen flex items-center">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center">
-            <div className="w-full max-w-lg bg-slate-200 p-8 shadow-md rounded-lg">
-              <h2 className="text-center text-2xl font-bold mb-6">
-                Register Now
-              </h2>
-              <form onSubmit={handleSubmit} className="register-form">
-                <div className="form-group mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-gray-700 font-semibold"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    name="name"
-                    id="name"
-                    onChange={handleInput}
-                    disabled={loading}
-                  />
-                  {errors.name.required && (
-                    <span className="text-red-500 text-sm">
-                      Name is required.
-                    </span>
-                  )}
-                </div>
+      <NavBar2 />
 
-                <div className="form-group mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-700 font-semibold"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    name="email"
-                    id="email"
-                    onChange={handleInput}
-                    disabled={loading}
-                  />
-                  {errors.email.required && (
-                    <span className="text-red-500 text-sm">
-                      Email is required.
-                    </span>
-                  )}
-                  {errors.email.invalid && (
-                    <span className="text-red-500 text-sm">
-                      Enter a valid email address.
-                    </span>
-                  )}
-                </div>
-
-                <div className="form-group mb-4">
-                  <label
-                    htmlFor="password"
-                    className="block text-gray-700 font-semibold"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    name="password"
-                    id="password"
-                    onChange={handleInput}
-                    disabled={loading}
-                  />
-                  {errors.password.required && (
-                    <span className="text-red-500 text-sm">
-                      Password is required.
-                    </span>
-                  )}
-                  {errors.password.weak && (
-                    <span className="text-red-500 text-sm">
-                      Password should be at least 6 characters.
-                    </span>
-                  )}
-                </div>
-
-                <div className="form-group mb-4">
-                  <label
-                    htmlFor="passwordConfirm"
-                    className="block text-gray-700 font-semibold"
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    name="passwordConfirm"
-                    id="passwordConfirm"
-                    onChange={handleInput}
-                    disabled={loading}
-                  />
-                  {errors.passwordConfirm.required && (
-                    <span className="text-red-500 text-sm">
-                      Confirm Password is required.
-                    </span>
-                  )}
-                  {errors.passwordConfirm.mismatch && (
-                    <span className="text-red-500 text-sm">
-                      Passwords do not match.
-                    </span>
-                  )}
-                </div>
-
-                {loading && (
-                  <div className="text-center my-4">
-                    <div className="animate-spin inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+      <div
+        style={{
+          backgroundImage: `url(${Home})`,
+        }}
+      >
+        <section className="register-block py-20 bg-hero-pattern min-h-screen flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-center">
+              <div className="w-full max-w-lg bg-slate-200 p-8 shadow-md rounded-lg">
+                <h2 className="text-center text-2xl font-bold mb-6">
+                  Register Now
+                </h2>
+                <form onSubmit={handleSubmit} className="register-form">
+                  <div className="form-group mb-4">
+                    <label
+                      htmlFor="name"
+                      className="block text-gray-700 font-semibold"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                      name="name"
+                      id="name"
+                      onChange={handleInput}
+                      disabled={loading}
+                    />
+                    {errors.name.required && (
+                      <span className="text-red-500 text-sm">
+                        Name is required.
+                      </span>
+                    )}
                   </div>
-                )}
 
-                {errors.custom_error && (
-                  <div className="text-red-500 text-center">
-                    <p>{errors.custom_error}</p>
+                  <div className="form-group mb-4">
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-700 font-semibold"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                      name="email"
+                      id="email"
+                      onChange={handleInput}
+                      disabled={loading}
+                    />
+                    {errors.email.required && (
+                      <span className="text-red-500 text-sm">
+                        Email is required.
+                      </span>
+                    )}
+                    {errors.email.invalid && (
+                      <span className="text-red-500 text-sm">
+                        Enter a valid email address.
+                      </span>
+                    )}
                   </div>
-                )}
 
-                <input
-                  type="submit"
-                  className="btn bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded mt-4 cursor-pointer"
-                  value="Register"
-                  disabled={loading}
-                />
+                  <div className="form-group mb-4">
+                    <label
+                      htmlFor="password"
+                      className="block text-gray-700 font-semibold"
+                    >
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                      name="password"
+                      id="password"
+                      onChange={handleInput}
+                      disabled={loading}
+                    />
+                    {errors.password.required && (
+                      <span className="text-red-500 text-sm">
+                        Password is required.
+                      </span>
+                    )}
+                    {errors.password.weak && (
+                      <span className="text-red-500 text-sm">
+                        Password should be at least 6 characters.
+                      </span>
+                    )}
+                  </div>
 
-                <div className="text-center text-sm mt-4">
-                  Already have an account?{" "}
-                  <Link to="/login" className="text-blue-500">
-                    Login
-                  </Link>
-                </div>
-              </form>
+                  <div className="form-group mb-4">
+                    <label
+                      htmlFor="passwordConfirm"
+                      className="block text-gray-700 font-semibold"
+                    >
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                      name="passwordConfirm"
+                      id="passwordConfirm"
+                      onChange={handleInput}
+                      disabled={loading}
+                    />
+                    {errors.passwordConfirm.required && (
+                      <span className="text-red-500 text-sm">
+                        Confirm Password is required.
+                      </span>
+                    )}
+                    {errors.passwordConfirm.mismatch && (
+                      <span className="text-red-500 text-sm">
+                        Passwords do not match.
+                      </span>
+                    )}
+                  </div>
+
+                  {loading && (
+                    <div className="text-center my-4">
+                      <div className="animate-spin inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+                    </div>
+                  )}
+
+                  {errors.custom_error && (
+                    <div className="text-red-500 text-center">
+                      <p>{errors.custom_error}</p>
+                    </div>
+                  )}
+
+                  <input
+                    type="submit"
+                    className="btn bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded mt-4 cursor-pointer"
+                    value="Register"
+                    disabled={loading}
+                  />
+
+                  <div className="text-center text-sm mt-4">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-500">
+                      Login
+                    </Link>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer/>
+        </section>
+      </div>
+
+      <Footer />
     </div>
   );
 }
