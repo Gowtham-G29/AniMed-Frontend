@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
+import { signup } from "../services/api";
 
 function Register() {
   const initialState = {
@@ -23,7 +24,7 @@ function Register() {
     passwordConfirm: "",
   });
 
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -71,41 +72,54 @@ function Register() {
 
     // Proceed with registration if no errors
     setLoading(true);
-    // try {
-    //   const response = await signup({
-    //     name: inputs.name,
-    //     email: inputs.email,
-    //     password: inputs.password,
-    //     passwordConfirm: inputs.passwordConfirm,
-    //   });
-    //   if (response.data.token) navigate("/login"); // Redirect to login after successful registration
-    // } catch (err) {
-    //   setLoading(false);
 
-    //   // Default to a generic error message
-    //   let customError = "An unexpected error occurred. Please try again later.";
+    console.log(inputs);
+    try {
+      const response = await signup({
+        name: inputs.name,
+        email: inputs.email,
+        role: inputs.role,
+        password: inputs.password,
+        passwordConfirm: inputs.passwordConfirm,
+      });
 
-    //   if (err.response) {
-    //     const serverError = err.response.data?.message || customError;
+      console.log(response.data);
 
-    //     if (serverError === "User Already Registered") {
-    //       customError = "This email is already registered.";
-    //     } else if (serverError.includes("WEAK_PASSWORD")) {
-    //       customError = "Password should be at least 6 characters.";
-    //     } else {
-    //       customError = serverError;
-    //     }
-    //   } else if (err.request) {
-    //     customError = "Network error. Please check your connection.";
-    //   } else {
-    //     customError = "An unexpected error occurred. Please try again later.";
-    //   }
+      if (response.data.token && response.data.newUser.role === "veternarian") {
+        setLoading(false);
+        navigate("/vetDoctorDetailsRegister");
+      }
+      if (response.data.token && response.data.newUser.role === "user") {
+        setLoading(false);
+        navigate("/userDetailsRegister");
+      }
+    } catch (err) {
+      setLoading(false);
 
-    //   setErrors({
-    //     ...validationErrors,
-    //     custom_error: customError,
-    //   });
-    // }
+      // Default to a generic error message
+      let customError = "An unexpected error occurred. Please try again later.";
+
+      if (err.response) {
+        const serverError = err.response.data?.message || customError;
+
+        if (serverError === "User Already Registered") {
+          customError = "This email is already registered.";
+        } else if (serverError.includes("WEAK_PASSWORD")) {
+          customError = "Password should be at least 6 characters.";
+        } else {
+          customError = serverError;
+        }
+      } else if (err.request) {
+        customError = "Network error. Please check your connection.";
+      } else {
+        customError = "An unexpected error occurred. Please try again later.";
+      }
+
+      setErrors({
+        ...validationErrors,
+        custom_error: customError,
+      });
+    }
   };
 
   const handleInput = (event) => {
@@ -187,8 +201,8 @@ function Register() {
                       value={inputs.role}
                       className="form-control w-full p-2 border border-gray-300 rounded mt-1"
                     >
-                      <option value="English">User</option>
-                      <option value="Spanish">Veternarian</option>
+                      <option value="user">User</option>
+                      <option value="veternarian">Veternarian</option>
                     </select>
                   </div>
 

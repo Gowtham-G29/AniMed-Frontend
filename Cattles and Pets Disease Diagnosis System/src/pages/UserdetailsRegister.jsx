@@ -2,6 +2,8 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
+import { userDetailsRegister } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function UserDetailsRegister() {
   const initialState = {
@@ -20,8 +22,10 @@ function UserDetailsRegister() {
     telephoneNumber: "",
     contactEmail: "",
     Address: "",
-    photo: "",
+    photo: "default.jpeg",
   });
+
+  const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -59,6 +63,23 @@ function UserDetailsRegister() {
 
     setLoading(true);
     // Submit data to backend here
+    try {
+      const response = await userDetailsRegister({
+        Name: inputs.Name,
+        contactNumber: inputs.contactNumber,
+        telephoneNumber: inputs.telephoneNumber,
+        contactEmail: inputs.contactEmail,
+        Address: inputs.Address,
+        photo: inputs.photo,
+      });
+
+      if (response.data.token) {
+        setLoading(false);
+        navigate("/");
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   const handleInput = (event) => {
@@ -80,7 +101,10 @@ function UserDetailsRegister() {
                 <h2 className="text-center text-2xl font-bold mb-6">
                   Register Animal Owner
                 </h2>
-                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="grid grid-cols-2 gap-4"
+                >
                   {/* Name */}
                   <div>
                     <label className="block text-gray-700 font-semibold">
