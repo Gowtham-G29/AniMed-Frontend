@@ -95,30 +95,7 @@ function Register() {
       }
     } catch (err) {
       setLoading(false);
-
-      // Default to a generic error message
-      let customError = "An unexpected error occurred. Please try again later.";
-
-      if (err.response) {
-        const serverError = err.response.data?.message || customError;
-
-        if (serverError === "User Already Registered") {
-          customError = "This email is already registered.";
-        } else if (serverError.includes("WEAK_PASSWORD")) {
-          customError = "Password should be at least 6 characters.";
-        } else {
-          customError = serverError;
-        }
-      } else if (err.request) {
-        customError = "Network error. Please check your connection.";
-      } else {
-        customError = "An unexpected error occurred. Please try again later.";
-      }
-
-      setErrors({
-        ...validationErrors,
-        custom_error: customError,
-      });
+       console.log(err); 
     }
   };
 

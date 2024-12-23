@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
+import { vetDoctorDetailsRegister } from "../services/api";
 
 function VetDoctorDetailsRegister() {
+  const navigate = useNavigate();
+
   const initialState = {
     fullName: { required: false },
     email: { required: false, invalid: false },
@@ -12,7 +15,6 @@ function VetDoctorDetailsRegister() {
     licenseNumber: { required: false },
     specialization: { required: false },
     experience: { required: false },
-    password: { required: false },
     custom_error: null,
   };
 
@@ -27,8 +29,6 @@ function VetDoctorDetailsRegister() {
     experience: "",
     clinicName: "",
     clinicAddress: "",
-    password: "",
-    profilePicture: "",
     preferredLanguage: "English",
   });
 
@@ -68,10 +68,6 @@ function VetDoctorDetailsRegister() {
       validationErrors.experience.required = true;
       hasError = true;
     }
-    if (!inputs.password) {
-      validationErrors.password.required = true;
-      hasError = true;
-    }
 
     if (hasError) {
       setErrors(validationErrors);
@@ -79,11 +75,36 @@ function VetDoctorDetailsRegister() {
     }
 
     setLoading(true);
-    // Submit data to backend here
+
+    try {
+      const payload = {
+        fullName: inputs.fullName,
+        email: inputs.email,
+        phoneNumber: inputs.phoneNumber,
+        licenseNumber: inputs.licenseNumber,
+        specialization: inputs.specialization,
+        experience: inputs.experience,
+        clinicName: inputs.clinicName,
+        clinicAddress: inputs.clinicAddress,
+        preferredLanguage: inputs.preferredLanguage,
+      };
+
+      const response = await vetDoctorDetailsRegister(payload);
+      console.log("frontend", response);
+
+      if (response.data.token) {
+        setLoading(false);
+        navigate("/regSuccessPage");
+      }
+    } catch (error) {
+      setLoading(false);
+      return error;
+    }
   };
 
   const handleInput = (event) => {
-    setInputs({ ...inputs, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    setInputs({ ...inputs, [name]: value });
   };
 
   return (
@@ -240,43 +261,7 @@ function VetDoctorDetailsRegister() {
                       name="clinicAddress"
                       onChange={handleInput}
                       className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    />
-                  </div>
-
-                  {/* Password */}
-                  <div>
-                    <label className="block text-gray-700 font-semibold">
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      onChange={handleInput}
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    />
-                    {errors.password.required && (
-                      <span className="text-red-500 text-sm">
-                        Password is required.
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Profile Picture */}
-                  <div>
-                    <label className="block text-gray-700 font-semibold">
-                      Profile Picture
-                    </label>
-                    <input
-                      type="file"
-                      name="profilePicture"
-                      onChange={(event) => {
-                        setInputs({
-                          ...inputs,
-                          profilePicture: event.target.files[0],
-                        });
-                      }}
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    />
+                    ></textarea>
                   </div>
 
                   {/* Preferred Language */}
@@ -291,39 +276,40 @@ function VetDoctorDetailsRegister() {
                       className="form-control w-full p-2 border border-gray-300 rounded mt-1"
                     >
                       <option value="English">English</option>
-                      <option value="Spanish">Spanish</option>
-                      <option value="French">French</option>
-                      <option value="German">German</option>
-                      <option value="Hindi">Hindi</option>
                       <option value="Tamil">Tamil</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Telugu">Telugu</option>
+                      <option value="Malayalam">Malayalam</option>
                     </select>
                   </div>
 
                   {/* Submit Button */}
-                  <div className="col-span-2">
+                  <div className="col-span-2 text-center">
                     <button
                       type="submit"
-                      disabled={loading}
-                      className={`w-full p-2 text-white bg-blue-600 rounded hover:bg-blue-700 ${
+                      className={`btn w-full bg-blue-500 text-white py-2 rounded ${
                         loading ? "opacity-50 cursor-not-allowed" : ""
                       }`}
+                      disabled={loading}
                     >
                       {loading ? "Submitting..." : "Register"}
                     </button>
-                    {errors.custom_error && (
-                      <p className="text-red-500 text-center mt-2">
-                        {errors.custom_error}
-                      </p>
-                    )}
                   </div>
                 </form>
-                <div className="mt-4 text-center">
-                  <p>
-                    Already have an account?{" "}
-                    <Link to="/login" className="text-blue-600 hover:underline">
-                      Login here
-                    </Link>
-                  </p>
+
+                {/* Error Message */}
+                {errors.custom_error && (
+                  <div className="text-center text-red-500 mt-4">
+                    {errors.custom_error}
+                  </div>
+                )}
+
+                {/* Login Link */}
+                <div className="mt-6 text-center">
+                  Already registered?{" "}
+                  <Link to="/login" className="text-blue-500">
+                    Login here
+                  </Link>
                 </div>
               </div>
             </div>

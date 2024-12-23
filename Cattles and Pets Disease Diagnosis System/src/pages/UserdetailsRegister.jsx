@@ -22,7 +22,6 @@ function UserDetailsRegister() {
     telephoneNumber: "",
     contactEmail: "",
     Address: "",
-    photo: "default.jpeg",
   });
 
   const navigate = useNavigate();
@@ -60,9 +59,7 @@ function UserDetailsRegister() {
       setErrors(validationErrors);
       return;
     }
-
     setLoading(true);
-    // Submit data to backend here
     try {
       const response = await userDetailsRegister({
         Name: inputs.Name,
@@ -70,15 +67,15 @@ function UserDetailsRegister() {
         telephoneNumber: inputs.telephoneNumber,
         contactEmail: inputs.contactEmail,
         Address: inputs.Address,
-        photo: inputs.photo,
       });
 
       if (response.data.token) {
         setLoading(false);
         navigate("/");
       }
+
     } catch (error) {
-      throw new Error(error);
+      console.log(error)
     }
   };
 
@@ -179,6 +176,7 @@ function UserDetailsRegister() {
                   </div>
 
                   {/* Address */}
+                  
                   <div>
                     <label className="block text-gray-700 font-semibold">
                       Address
@@ -193,22 +191,6 @@ function UserDetailsRegister() {
                         Address is required.
                       </span>
                     )}
-                  </div>
-
-                  {/* Photo */}
-                  <div>
-                    <label className="block text-gray-700 font-semibold">
-                      Profile Photo
-                    </label>
-                    <input
-                      type="file"
-                      placeholder="Optional"
-                      name="photo"
-                      onChange={(e) =>
-                        setInputs({ ...inputs, photo: e.target.files[0] })
-                      }
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                    />
                   </div>
 
                   <div className="col-span-2">
