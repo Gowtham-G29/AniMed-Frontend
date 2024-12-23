@@ -6,6 +6,7 @@ import ForgotPass from "./pages/ForgotPass";
 import ResetPassword from "./pages/ResetPass";
 import UserDetailsRegister from "./pages/UserdetailsRegister";
 import VetDoctorDetailsRegister from "./pages/DoctorDetailsRegister";
+import RegSuccessPage from "./pages/RegSuccessPage";
 
 export default function App() {
   return (
@@ -19,7 +20,7 @@ export default function App() {
           <Route path="/resetPassword/:token" element={<ResetPassword/>}/>
           <Route path="/userDetailsRegister" element={<UserDetailsRegister/>}/>
           <Route path="/vetDoctorDetailsRegister" element={<VetDoctorDetailsRegister/>}/>
-
+          <Route path="/regSuccessPage" element={<RegSuccessPage/>}/>
 
         </Routes>
       </BrowserRouter>
