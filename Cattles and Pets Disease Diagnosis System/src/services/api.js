@@ -1,8 +1,23 @@
 import axios from 'axios';
 
 
-
 const BASE_URL = `https://animed-backend.onrender.com`;
+
+
+export const login=async(inputs)=>{
+  try {
+    console.log(inputs);
+    const response=await axios.post(`${BASE_URL}/api/v1/users/login`,inputs,{
+      withCredentials:true
+    });
+    console.log(response.data);
+    return response;
+
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'login failed');
+  }
+}
+
 
 export const signup = async (inputs) => {
   try {
@@ -46,7 +61,7 @@ export const userDetailsRegister = async (inputs) => {
 
     return response;
   } catch (error) {
-
+    
     throw new Error(error);
   }
 };
@@ -81,3 +96,35 @@ export const vetDoctorDetailsRegister = async (inputs) => {
 
   }
 };
+
+
+export const animalDetailsRegister = async (inputs) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/v1/animals/animalDetailsRegister`,
+      inputs,
+      {
+        withCredentials: true, 
+      }
+    );
+    return response;
+  } catch (error) {
+
+    throw new Error(error);
+  }
+};
+
+export const accountDeactivate=async()=>{
+  try {
+    const response=await axios.patch(`${BASE_URL}/api/v1/users/deleteMe`,{},{withCredentials:true});
+    console.log(response);
+    return response;
+    
+  } catch (error) {
+    throw new Error(error);
+    
+  }
+}
+
+
+
