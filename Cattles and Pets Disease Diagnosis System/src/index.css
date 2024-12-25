@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Default (light theme)
+body {
+    --bg-color: white;
+    --text-color: black;
+    --link-color: blue;
+  }
+  
+  /* Dark theme */
+  /* body.dark {
+    --bg-color: #121212;
+    --text-color: white;
+    --link-color: lightblue;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  a {
+    color: var(--link-color);
+  /* } * */
+  

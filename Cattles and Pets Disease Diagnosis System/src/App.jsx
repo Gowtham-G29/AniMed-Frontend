@@ -7,6 +7,9 @@ import ResetPassword from "./pages/ResetPass";
 import UserDetailsRegister from "./pages/UserdetailsRegister";
 import VetDoctorDetailsRegister from "./pages/DoctorDetailsRegister";
 import RegSuccessPage from "./pages/RegSuccessPage";
+import AnimalDetailsRegister from "./pages/AnimalDetailsRegister";
+import DashboardLayoutBasic from "./pages/DoctorDashboard";
+import DashboardLayoutNavigationActions from "./pages/UserDashboard";
 
 export default function App() {
   return (
@@ -21,7 +24,9 @@ export default function App() {
           <Route path="/userDetailsRegister" element={<UserDetailsRegister/>}/>
           <Route path="/vetDoctorDetailsRegister" element={<VetDoctorDetailsRegister/>}/>
           <Route path="/regSuccessPage" element={<RegSuccessPage/>}/>
-
+          <Route path="/animalRegister" element={<AnimalDetailsRegister/>}/>
+          <Route path="/doctorDashboard" element={<DashboardLayoutBasic/>}/>
+          <Route path='/userDashboard' element={<DashboardLayoutNavigationActions/>}/>
         </Routes>
       </BrowserRouter>
     </>
