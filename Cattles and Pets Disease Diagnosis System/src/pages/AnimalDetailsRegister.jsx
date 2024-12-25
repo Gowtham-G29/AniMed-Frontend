@@ -10,11 +10,11 @@ import {
   StepLabel,
   Button,
   TextField,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { animalDetailsRegister } from "../services/api";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 // Sample breed data based on species
 const speciesBreeds = {
@@ -53,6 +53,7 @@ function AnimalDetailsRegister() {
     },
     insurance: "",
     ownerShipDocument: "",
+    geolocation:{ latitude: "", longitude: "" },
   });
 
   const [errors, setErrors] = useState({
@@ -95,9 +96,35 @@ function AnimalDetailsRegister() {
     setActiveStep(activeStep - 1);
   };
 
+
+  const location = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setInputs((prevInputs) => ({
+            ...prevInputs,
+            geolocation: {
+              latitude: String(latitude),
+              longitude: String(longitude),
+            },
+          }));
+        },
+        (error) => {
+          console.error("Error fetching location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    location();
     setLoading(true);
+   
 
     try {
       const response = await animalDetailsRegister(inputs);
@@ -111,6 +138,8 @@ function AnimalDetailsRegister() {
     }
   };
 
+ 
+  // Call the location function to update the geolocation when needed
   return (
     <div>
       <NavBar2 />
@@ -168,7 +197,6 @@ function AnimalDetailsRegister() {
 
                       <TextField
                         select
-                        
                         name="breed"
                         onChange={handleInput}
                         value={inputs.breed}
@@ -293,8 +321,8 @@ function AnimalDetailsRegister() {
                           onClick={() => handleAddRecord("vaccinationRecords")}
                           color="primary"
                         >
-                          Add <AddCircleOutlineIcon color="primary"/>
-                          </Button>
+                          Add <AddCircleOutlineIcon color="primary" />
+                        </Button>
                       </div>
 
                       <div>
@@ -357,8 +385,8 @@ function AnimalDetailsRegister() {
                           onClick={() => handleAddRecord("previousIllnesses")}
                           color="primary"
                         >
-                          Add <AddCircleOutlineIcon color="primary"/>
-                          </Button>
+                          Add <AddCircleOutlineIcon color="primary" />
+                        </Button>
                       </div>
 
                       {/* Surgical History */}
@@ -422,8 +450,8 @@ function AnimalDetailsRegister() {
                           onClick={() => handleAddRecord("surgicalHistory")}
                           color="primary"
                         >
-                          Add  <AddCircleOutlineIcon color="primary"/>
-                          </Button>
+                          Add <AddCircleOutlineIcon color="primary" />
+                        </Button>
                       </div>
 
                       <div>
@@ -465,7 +493,7 @@ function AnimalDetailsRegister() {
                           onClick={() => handleAddRecord("allergies")}
                           color="primary"
                         >
-                          Add <AddCircleOutlineIcon color="primary"/>
+                          Add <AddCircleOutlineIcon color="primary" />
                         </Button>
                       </div>
                     </div>
@@ -628,7 +656,7 @@ function AnimalDetailsRegister() {
 
                 {loading && (
                   <div className="flex justify-center mt-8">
-                    <CircularProgress/>
+                    <CircularProgress />
                   </div>
                 )}
               </form>
