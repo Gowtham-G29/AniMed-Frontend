@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Home from "../assets/Home.webp";
+import { login } from "../services/api";
 
 function LoginPage() {
   const initialState = {
@@ -19,7 +20,7 @@ function LoginPage() {
     password: "",
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,37 +47,57 @@ function LoginPage() {
 
     // Proceed with login if no errors
     setLoading(true);
-    // try {
-    //   const response = await Login({
-    //     email: inputs.email,
-    //     password: inputs.password,
-    //   });
-    //   setLoading(false);
+    try {
+      const response = await login({
+        email: inputs.email,
+        password: inputs.password,
+      });
+      setLoading(false);
 
-    //   // Handle successful login
-    //   if (response.data.token) {
-    //     localStorage.clear();
-    //     localStorage.setItem("jwt", response.data.token);
-    //     navigate("/dashboard");
-    //   }
-    // } catch (err) {
-    //   setLoading(false);
-    //   const serverError = err.response?.data?.message || "An unexpected error occurred.";
-    //   let customError = null;
+      // Handle successful login
+      if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='user') {
+        localStorage.clear();
+        localStorage.setItem("jwt", response.data.token);
+        navigate("/userDashboard");
+      }
+      
+      if(response.data.token&&response.data.user.detailsRegStatus===false&&response.data.user.role==='user'){
+        localStorage.clear();
+        localStorage.setItem("jwt", response.data.token);
+        navigate('/userDetailsRegister')
+      }
 
-    //   if (serverError === "Invalid password") {
-    //     customError = "Invalid password.";
-    //   } else if (serverError === "User Not Found") {
-    //     customError = "Invalid Email! User Not Found.";
-    //   } else {
-    //     customError = "An error occurred. Please try again.";
-    //   }
+      if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='veternarian') {
+        localStorage.clear();
+        localStorage.setItem("jwt", response.data.token);
+        navigate("/doctorDashboard");
+      }
+      
+      if(response.data.token&&response.data.user.detailsRegStatus===false&&response.data.user.role==='veternarian'){
+        localStorage.clear();
+        localStorage.setItem("jwt", response.data.token);
+        navigate('/vetDoctorDetailsRegister')
+      }
 
-    //   setErrors({
-    //     ...validationErrors,
-    //     custom_error: customError,
-    //   });
-    // }
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      const serverError = err.response?.data?.message || "An unexpected error occurred.";
+      let customError = null;
+
+      if (serverError === "Invalid password") {
+        customError = "Invalid password.";
+      } else if (serverError === "User Not Found") {
+        customError = "Invalid Email! User Not Found.";
+      } else {
+        customError = "An error occurred. Please try again.";
+      }
+
+      setErrors({
+        ...validationErrors,
+        custom_error: customError,
+      });
+    }
   };
 
   const handleInput = (event) => {

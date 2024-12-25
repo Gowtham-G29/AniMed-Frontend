@@ -68,10 +68,11 @@ function UserDetailsRegister() {
         contactEmail: inputs.contactEmail,
         Address: inputs.Address,
       });
+      console.log(response);
 
       if (response.data.token) {
         setLoading(false);
-        navigate("/");
+        navigate("/doctordashboard");
       }
 
     } catch (error) {
