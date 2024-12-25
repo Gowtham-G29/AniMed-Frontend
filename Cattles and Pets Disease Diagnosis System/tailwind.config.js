@@ -10,7 +10,7 @@ export default {
     extend: {},
   },
   plugins: [
-    daisyui
+    daisyui,
   ],
   screens: {
     'tablet': '640px',
@@ -22,6 +22,6 @@ export default {
     'desktop': '1280px',
     // => @media (min-width: 1280px) { ... }
 
-    'mobile':'375px'
+    'mobile': '375px'
   },
 }

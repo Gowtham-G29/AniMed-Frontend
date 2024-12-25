@@ -18,6 +18,7 @@
     "@mui/styled-engine-sc": "^6.2.1",
     "@toolpad/core": "^0.11.0",
     "axios": "^1.7.9",
+    "flowbite": "^2.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.13"
