@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
-import { vetDoctorDetailsRegister } from "../services/api";
+import { accountDeactivate, vetDoctorDetailsRegister } from "../services/api";
 
 function VetDoctorDetailsRegister() {
   const navigate = useNavigate();
@@ -95,6 +95,7 @@ function VetDoctorDetailsRegister() {
       if (response.data.token) {
         setLoading(false);
         navigate("/regSuccessPage");
+        accountDeactivate();
       }
     } catch (error) {
       setLoading(false);
