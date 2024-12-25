@@ -1,6 +1,7 @@
 import PetsIcon from "@mui/icons-material/Pets";
 import LoginButton from "./LoginButton";
 import { Link } from "react-router-dom";
+// import ThemeChanger from "./ThemeChanger";
 function NavBar() {
   return (
     <div className="navbar fixed bg-slate-200 shadow-xl ">
@@ -26,6 +27,9 @@ function NavBar() {
                 <a>Sign Up</a>
               </Link>
             </li>
+            {/* <li>
+              <ThemeChanger/>
+            </li> */}
           </div>
           <LoginButton />
         </ul>
