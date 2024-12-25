@@ -5,6 +5,7 @@ import NavBar2 from "../components/NavBar2";
 import { useNavigate } from "react-router-dom";
 import Home from "../assets/Home.webp";
 import { login } from "../services/api";
+// import OAuthSignInPage from "../components/OauthComponent";
 
 function LoginPage() {
   const initialState = {
@@ -45,7 +46,6 @@ function LoginPage() {
       return;
     }
 
-    // Proceed with login if no errors
     setLoading(true);
     try {
       const response = await login({
@@ -54,7 +54,6 @@ function LoginPage() {
       });
       setLoading(false);
 
-      // Handle successful login
       if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='user') {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);

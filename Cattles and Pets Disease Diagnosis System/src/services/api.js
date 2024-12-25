@@ -91,7 +91,7 @@ export const vetDoctorDetailsRegister = async (inputs) => {
     return response;
 
   } catch (error) {
-
+ 
     throw new Error(error);
 
   }
@@ -99,6 +99,7 @@ export const vetDoctorDetailsRegister = async (inputs) => {
 
 
 export const animalDetailsRegister = async (inputs) => {
+  console.log(inputs);
   try {
     const response = await axios.post(
       `${BASE_URL}/api/v1/animals/animalDetailsRegister`,
@@ -110,7 +111,7 @@ export const animalDetailsRegister = async (inputs) => {
     return response;
   } catch (error) {
 
-    throw new Error(error);
+    console.log(error);
   }
 };
 
