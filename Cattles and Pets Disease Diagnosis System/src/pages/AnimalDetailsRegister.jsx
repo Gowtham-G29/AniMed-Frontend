@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
 
 import {
@@ -15,15 +13,196 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { animalDetailsRegister } from "../services/api";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { useEffect } from "react";
+import AnimalRegisterSnackBar from "../components/AnimalRegisterSnackBar";
+import Loader from "../components/Loader";
 
 // Sample breed data based on species
 const speciesBreeds = {
-  Dog: ["Labrador", "Bulldog", "Beagle"],
-  Cat: ["Persian", "Siamese", "Maine Coon"],
-  // Add other species and breeds here
+  Dog: [
+    "Akita",
+    "Australian Shepherd",
+    "Bakharwal Dog",
+    "Beagle",
+    "Border Collie",
+    "Boston Terrier",
+    "Boxer",
+    "Bulldog",
+    "Chihuahua",
+    "Chippiparai",
+    "Cocker Spaniel",
+    "Combai",
+    "Dachshund",
+    "Doberman Pinscher",
+    "Gaddi Kutta",
+    "German Shepherd",
+    "Golden Retriever",
+    "Great Dane",
+    "Himalayan Sheepdog",
+    "Indian Pariah Dog",
+    "Kanni",
+    "Labrador Retriever",
+    "Mastiff",
+    "Mudhol Hound",
+    "Pandikona",
+    "Pomeranian",
+    "Poodle",
+    "Pug",
+    "Rajapalayam",
+    "Rampur Greyhound",
+    "Rottweiler",
+    "Saint Bernard",
+    "Shih Tzu",
+    "Siberian Husky",
+    "Yorkshire Terrier",
+  ],
+  Cat: [
+    "Abyssinian",
+    "American Shorthair",
+    "Bengal",
+    "Birman",
+    "British Shorthair",
+    "Himalayan Cat",
+    "Indian Billi (Street Cat)",
+    "Jungle Cat",
+    "Maine Coon",
+    "Norwegian Forest Cat",
+    "Oriental Shorthair",
+    "Persian Cat",
+    "Ragdoll",
+    "Scottish Fold",
+    "Siberian Cat",
+    "Siamese",
+    "Sphynx",
+    "Spotted Cat",
+    "Turkish Angora",
+  ],
+  Bird: [
+    "African Grey Parrot",
+    "Alexandrine Parakeet",
+    "Budgerigar",
+    "Canary",
+    "Cockatiel",
+    "Cockatoo",
+    "Eclectus Parrot",
+    "Finch",
+    "Indian Ringneck Parakeet",
+    "Lovebird",
+    "Macaw",
+    "Mynah",
+    "Parrotlet",
+    "Pigeon",
+    "Rosella",
+    "Zebra Finch",
+  ],
+  Hamster: [
+    "Chinese Hamster",
+    "Dwarf Campbell Russian Hamster",
+    "Dwarf Winter White Russian Hamster",
+    "Roborovski Hamster",
+    "Syrian Hamster",
+  ],
+  Fish: [
+    "Angelfish",
+    "Betta Fish",
+    "Catfish",
+    "Clownfish",
+    "Discus",
+    "Goldfish",
+    "Guppy",
+    "Koi",
+    "Molly",
+    "Neon Tetra",
+    "Oscar",
+    "Platy",
+    "Rainbow Fish",
+    "Swordtail",
+    "Zebrafish",
+  ],
+  Cow: [
+    "Gir",
+    "Sahiwal",
+    "Red Sindhi",
+    "Ongole",
+    "Kankrej",
+    "Tharparkar",
+    "Malnad Gidda",
+    "Holstein Friesian",
+    "Jersey",
+    "Brown Swiss",
+    "Guernsey",
+    "Ayrshire",
+  ],
+  Sheep: [
+    "Deccani",
+    "Nellore",
+    "Marwari",
+    "Gaddi",
+    "Rampur Bushair",
+    "Madras Red",
+    "Mecheri",
+    "Merino",
+    "Dorset",
+    "Suffolk",
+    "Texel",
+    "Hampshire",
+  ],
+  Goat: [
+    "Jamunapari",
+    "Beetal",
+    "Barbari",
+    "Malabari",
+    "Sirohi",
+    "Osmanabadi",
+    "Black Bengal",
+    "Boer",
+    "Toggenburg",
+    "Alpine",
+    "Saanen",
+    "Nubian",
+  ],
+  Pig: [
+    "Ghoongroo",
+    "Niang Megha",
+    "Agonda Goan",
+    "Tenyi Vo",
+    "Yorkshire",
+    "Landrace",
+    "Duroc",
+    "Berkshire",
+    "Hampshire",
+  ],
+  Horse: [
+    "Marwari",
+    "Kathiawari",
+    "Zanskari",
+    "Bhutia",
+    "Manipuri",
+    "Spiti",
+    "Thoroughbred",
+    "Arabian",
+    "Quarter Horse",
+    "Clydesdale",
+    "Friesian",
+    "Shetland Pony",
+  ],
+  Donkey: [
+    "Halari",
+    "Spiti",
+    "Kachchhi",
+    "Andhra",
+    "Poitou",
+    "Miniature Donkey",
+    "Mammoth Donkey",
+    "Andalusian Donkey",
+  ],
 };
 
-function AnimalDetailsRegister() {
+function AnimalDetailsRegister({
+  animalSpecies,
+  setanimalRegStatus,
+  setanimalRegFail,
+}) {
   const navigate = useNavigate();
   const steps = [
     "Basic Details",
@@ -31,6 +210,8 @@ function AnimalDetailsRegister() {
     "Current Complaints",
     "Other Details",
   ];
+
+  // const [regSuccess,setRegSuccess]=useState(false);
 
   const [activeStep, setActiveStep] = useState(0);
   const [inputs, setInputs] = useState({
@@ -53,7 +234,7 @@ function AnimalDetailsRegister() {
     },
     insurance: "",
     ownerShipDocument: "",
-    geolocation:{ latitude: "", longitude: "" },
+    geolocation: { latitude: "", longitude: "" },
   });
 
   const [errors, setErrors] = useState({
@@ -65,6 +246,14 @@ function AnimalDetailsRegister() {
   });
 
   const [loading, setLoading] = useState(false);
+
+  // Sync the species field with the animalSpecies prop
+  useEffect(() => {
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      species: animalSpecies || "",
+    }));
+  }, [animalSpecies]);
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -96,7 +285,6 @@ function AnimalDetailsRegister() {
     setActiveStep(activeStep - 1);
   };
 
-
   const location = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -118,42 +306,35 @@ function AnimalDetailsRegister() {
       console.error("Geolocation is not supported by this browser.");
     }
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     location();
     setLoading(true);
-   
 
     try {
       const response = await animalDetailsRegister(inputs);
       if (response.data.token) {
+        setanimalRegStatus(true);
         setLoading(false);
-        navigate("/");
       }
     } catch (error) {
+      setanimalRegFail(true);
       setLoading(false);
       console.error(error);
     }
   };
 
- 
-  // Call the location function to update the geolocation when needed
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div>
-      <NavBar2 />
-      <div
-        className="bg-slate-500"
-        style={{
-          backgroundImage: `url(${Home})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <section className="flex justify-center items-center min-h-screen">
-          <div className="container flex justify-center items-center py-28 px-2">
-            <div className="w-full max-w-4xl bg-white p-8 shadow-lg rounded-lg">
+      <div>
+        <section className="flex justify-center items-center min-h-screen  ">
+          <div className="container flex justify-center items-center py-28 px-2 pt-0">
+            <div className="w-full max-w-4xl bg-white p-8 ">
               <h2 className="text-center text-3xl font-bold mb-8 text-gray-800">
                 Register Animal Details
               </h2>
@@ -187,6 +368,7 @@ function AnimalDetailsRegister() {
                         onChange={handleInput}
                         value={inputs.species}
                         fullWidth
+                        disabled
                         variant="outlined"
                         error={errors.species.required}
                         helperText={
@@ -598,10 +780,9 @@ function AnimalDetailsRegister() {
                       />
                     </div>
                   )}
-
                   {/* Other Details Section */}
                   {activeStep === 3 && (
-                    <div className="step-content">
+                    <div className="step-content flex flex-col space-y-4">
                       <TextField
                         label="Insurance (Optional)"
                         name="insurance"
@@ -610,6 +791,7 @@ function AnimalDetailsRegister() {
                         fullWidth
                         variant="outlined"
                         margin="normal"
+                        className="w-full"
                       />
                       <TextField
                         label="Owner Ship Document (Optional)"
@@ -619,6 +801,7 @@ function AnimalDetailsRegister() {
                         fullWidth
                         variant="outlined"
                         margin="normal"
+                        className="w-full mx-"
                       />
                     </div>
                   )}
@@ -653,18 +836,11 @@ function AnimalDetailsRegister() {
                     </Button>
                   )}
                 </div>
-
-                {loading && (
-                  <div className="flex justify-center mt-8">
-                    <CircularProgress />
-                  </div>
-                )}
               </form>
             </div>
           </div>
         </section>
       </div>
-      <Footer />
     </div>
   );
 }

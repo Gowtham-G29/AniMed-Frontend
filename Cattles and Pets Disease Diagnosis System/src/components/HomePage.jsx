@@ -3,6 +3,9 @@ import NavBarMobile from "./NavBarMobile";
 import NavBar from "./NavBar";
 import Home from "../assets/Home.webp"
 import { Link } from "react-router-dom";
+import { AnimatedName } from "./AnimatedName";
+
+
 function HomePage() {
   return (
     <div>
@@ -24,7 +27,8 @@ function HomePage() {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content text-center">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">ANI MED</h1>
+            <h1 className="mb-5 text-5xl font-bold"><AnimatedName text="AniMed" className="custom-class" delay={50} />
+            </h1>
             <p className="mb-5">
               &quot;Compassion for Every Paw and Hoof – Caring Beyond
               Boundaries!&quot;

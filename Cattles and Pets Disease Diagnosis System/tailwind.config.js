@@ -11,6 +11,7 @@ export default {
   },
   plugins: [
     daisyui,
+
   ],
   screens: {
     'tablet': '640px',

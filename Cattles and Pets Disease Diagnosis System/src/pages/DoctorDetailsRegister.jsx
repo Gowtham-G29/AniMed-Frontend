@@ -90,7 +90,6 @@ function VetDoctorDetailsRegister() {
       };
 
       const response = await vetDoctorDetailsRegister(payload);
-      console.log("frontend", response);
 
       if (response.data.token) {
         setLoading(false);

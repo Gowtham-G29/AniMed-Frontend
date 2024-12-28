@@ -4,13 +4,11 @@ import axios from 'axios';
 const BASE_URL = `https://animed-backend.onrender.com`;
 
 
-export const login=async(inputs)=>{
+export const login = async (inputs) => {
   try {
-    console.log(inputs);
-    const response=await axios.post(`${BASE_URL}/api/v1/users/login`,inputs,{
-      withCredentials:true
+    const response = await axios.post(`${BASE_URL}/api/v1/users/login`, inputs, {
+      withCredentials: true
     });
-    console.log(response.data);
     return response;
 
   } catch (error) {
@@ -61,7 +59,7 @@ export const userDetailsRegister = async (inputs) => {
 
     return response;
   } catch (error) {
-    
+
     throw new Error(error);
   }
 };
@@ -91,7 +89,7 @@ export const vetDoctorDetailsRegister = async (inputs) => {
     return response;
 
   } catch (error) {
- 
+
     throw new Error(error);
 
   }
@@ -99,15 +97,15 @@ export const vetDoctorDetailsRegister = async (inputs) => {
 
 
 export const animalDetailsRegister = async (inputs) => {
-  console.log(inputs);
   try {
     const response = await axios.post(
       `${BASE_URL}/api/v1/animals/animalDetailsRegister`,
       inputs,
       {
-        withCredentials: true, 
+        withCredentials: true,
       }
     );
+
     return response;
   } catch (error) {
 
@@ -115,15 +113,42 @@ export const animalDetailsRegister = async (inputs) => {
   }
 };
 
-export const accountDeactivate=async()=>{
+export const accountDeactivate = async () => {
   try {
-    const response=await axios.patch(`${BASE_URL}/api/v1/users/deleteMe`,{},{withCredentials:true});
-    console.log(response);
+    const response = await axios.patch(`${BASE_URL}/api/v1/users/deleteMe`, {}, { withCredentials: true });
     return response;
-    
+
   } catch (error) {
     throw new Error(error);
+
+  }
+}
+
+export const getAnimalOwnerDetails = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getAnimalOwner`, {
+      withCredentials: true, // Ensures cookies are sent with the request
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    throw new Error(error);
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/v1/users/logout`, {
+      withCredentials: true
+    });
+
+    return response;
+
+  } catch (error) {
     
+    return error;
+
   }
 }
 

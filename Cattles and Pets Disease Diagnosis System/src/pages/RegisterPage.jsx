@@ -73,7 +73,6 @@ function Register() {
     // Proceed with registration if no errors
     setLoading(true);
 
-    console.log(inputs);
     try {
       const response = await signup({
         name: inputs.name,
@@ -83,7 +82,7 @@ function Register() {
         passwordConfirm: inputs.passwordConfirm,
       });
 
-      console.log(response.data);
+      
 
       if (response.data.token && response.data.newUser.role === "veternarian") {
         setLoading(false);
