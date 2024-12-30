@@ -12,6 +12,7 @@ export const login = async (inputs) => {
     return response;
 
   } catch (error) {
+    console.log(error);
     throw new Error(error.response?.data?.message || 'login failed');
   }
 }
@@ -42,6 +43,7 @@ export const signup = async (inputs) => {
 
 
 export const userDetailsRegister = async (inputs) => {
+  console.log(inputs)
   try {
 
     const response = await axios.post(
@@ -52,11 +54,18 @@ export const userDetailsRegister = async (inputs) => {
         telephoneNumber: inputs.telephoneNumber,
         contactEmail: inputs.contactEmail,
         Address: inputs.Address,
+        country: inputs.Country,
+        state: inputs.State,
+        district: inputs.District,
+        pincode: inputs.Pincode,
         photo: inputs.photo || null,
       },
       { withCredentials: true }
     );
 
+
+
+    console.log(response);
     return response;
   } catch (error) {
 
@@ -66,6 +75,7 @@ export const userDetailsRegister = async (inputs) => {
 
 
 export const vetDoctorDetailsRegister = async (inputs) => {
+  console.log(inputs.longitude)
   try {
     const response = await axios.post(
       `${BASE_URL}/api/v1/users/vetDoctorDetailsRegister`,
@@ -79,16 +89,31 @@ export const vetDoctorDetailsRegister = async (inputs) => {
         clinicName: inputs.clinicName,
         clinicAddress: inputs.clinicAddress,
         preferredLanguage: inputs.preferredLanguage,
+        state: inputs.state,
+        district: inputs.district,
+        pincode: inputs.pincode,
+        country: inputs.country,
+        geolocation: {
+          longitude: inputs.longitude,
+          latitude: inputs.latitude,
+        }
+
+
       },
+
       {
 
         withCredentials: true,
       }
     );
 
+
+    console.log(response);
     return response;
 
   } catch (error) {
+
+    console.log(error)
 
     throw new Error(error);
 
@@ -127,7 +152,7 @@ export const accountDeactivate = async () => {
 export const getAnimalOwnerDetails = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/users/getAnimalOwner`, {
-      withCredentials: true, // Ensures cookies are sent with the request
+      withCredentials: true,
     });
 
     return response;
@@ -146,11 +171,53 @@ export const logout = async () => {
     return response;
 
   } catch (error) {
-    
+
     return error;
 
   }
 }
+
+
+export const getAnimalDetails = async () => {
+  try {
+
+    const response = await axios.get(`${BASE_URL}/api/v1/animals/getAnimals`, {
+      withCredentials: true
+    });
+    return response;
+
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const deleteAnimal = async (animalID) => {
+  console.log('id', animalID);
+  try {
+    const response = await axios.delete(`${BASE_URL}/api/v1/animals/deleteAnimal`, {
+      data: { animalID },
+      withCredentials: true
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateAnimal = async (inputs) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}/api/v1/animals/updateAnimal`, inputs, {
+      withCredentials: true
+    });
+
+    return response;
+
+  } catch (error) {
+    return error;
+  }
+}
+
 
 
 

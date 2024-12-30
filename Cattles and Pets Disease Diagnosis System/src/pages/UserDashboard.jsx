@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
-import * as React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+
 import { createTheme } from "@mui/material/styles";
 import PetsIcon from "@mui/icons-material/Pets";
 import CallIcon from "@mui/icons-material/Call";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import CallMadeIcon from "@mui/icons-material/CallMade";
-import CallReceivedIcon from "@mui/icons-material/CallReceived";
+
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
@@ -41,9 +35,11 @@ import UserAccountOverview from "./UserDetails";
 import LogoutModel from "../components/LogoutModel";
 import { isAuthenticated } from "../services/Auth";
 import { useNavigate } from "react-router-dom";
-import ErrorPage from "../components/ErrorPage";
 import { useEffect } from "react";
 import LogoutImage from "../components/LogoutImage";
+import UpdateProfile from "./UpdateProfile";
+import AnimalDataTable from "../components/DataTableAnimal";
+import SuggestionList from "../components/SuggestionList";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -69,7 +65,6 @@ const DemoPageContent = ({ pathname, router }) => {
 
   const handleNavigate = (route) => {
     if (route === "/Home") {
-      // Reset states when navigating to /Intro
       setAnimalType("initial");
       setAnimalSpecies("");
       setanimalRegFail(false);
@@ -90,7 +85,27 @@ const DemoPageContent = ({ pathname, router }) => {
         textAlign: "center",
       }}
     >
-      <Typography>{pathname}</Typography>
+      {/* <Typography>{pathname}</Typography> */}
+
+      {pathname === "/YourAnimals/doctorSuggesitions" && (
+        <>
+          <Typography variant="h4" color="primary" marginBottom="50px">
+            Doctors Suggestions
+          </Typography>
+          <SuggestionList />
+        </>
+      )}
+
+      {pathname === "/YourAnimals/ViewLogs" && (
+        <>
+          <Typography variant="h4" color="primary" marginBottom="50px">
+            Register Logs
+          </Typography>
+          <AnimalDataTable />
+        </>
+      )}
+
+      {pathname === "/Account/updateAccount" && <UpdateProfile />}
 
       {pathname === "/Account/Logout" && (
         <>
@@ -200,58 +215,21 @@ const MEDICALHELP_NAVIGATION = [
   },
 ];
 
-const CALLS_NAVIGATION = [
-  {
-    segment: "made",
-    title: "Made",
-    icon: <CallMadeIcon />,
-    action: <Chip label={12} color="success" size="small" />,
-  },
-  {
-    segment: "received",
-    title: "Received",
-    icon: <CallReceivedIcon />,
-    action: <Chip label={4} color="error" size="small" />,
-  },
-];
+
 
 function DashboardLayoutNavigationActions() {
   const navigate = useNavigate();
 
   const router = useDemoRouter("Home");
-  const [popoverAnchorEl, setPopoverAnchorEl] = React.useState(null);
-  const isPopoverOpen = Boolean(popoverAnchorEl);
-
+  
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate("/");
     }
   }, [navigate]);
 
-  const handlePopoverButtonClick = (event) => {
-    setPopoverAnchorEl(event.currentTarget);
-  };
 
-  const handlePopoverClose = () => {
-    setPopoverAnchorEl(null);
-  };
-
-  const popoverMenuAction = (
-    <>
-      <IconButton aria-haspopup="true" onClick={handlePopoverButtonClick}>
-        <MoreHorizIcon />
-      </IconButton>
-      <Menu
-        open={isPopoverOpen}
-        anchorEl={popoverAnchorEl}
-        onClose={handlePopoverClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <MenuItem onClick={handlePopoverClose}>New call</MenuItem>
-        <MenuItem onClick={handlePopoverClose}>Mark all as read</MenuItem>
-      </Menu>
-    </>
-  );
+ 
 
   return (
     <AppProvider

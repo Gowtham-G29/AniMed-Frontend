@@ -29,7 +29,7 @@ function UserDashboardHomePage({ setregPageNavigate }) {
       className="hero min-h-screen"
       style={{
         backgroundImage:
-          "url(https://i.pinimg.com/474x/b9/3a/b0/b93ab0864404db012d1578d59ae3dee4.jpg)",
+          "url(https://i.pinimg.com/736x/8e/73/77/8e73771f779f6303631c970586b0844b.jpg)",
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>

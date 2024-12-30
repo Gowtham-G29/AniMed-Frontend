@@ -5,6 +5,7 @@ import NavBar2 from "../components/NavBar2";
 import { useNavigate } from "react-router-dom";
 import Home from "../assets/Home.webp";
 import { login } from "../services/api";
+import { Button, CircularProgress, TextField } from "@mui/material";
 // import OAuthSignInPage from "../components/OauthComponent";
 
 function LoginPage() {
@@ -111,108 +112,82 @@ function LoginPage() {
           backgroundImage: `url(${Home})`,
         }}
       >
-        <section className="min-h-screen flex items-center justify-center bg-hero-pattern">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-center">
-              <div className="w-full max-w-md bg-slate-200 p-8 rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold text-center mb-6">
-                  Login Now
-                </h2>
-                <form onSubmit={handleSubmit} className="login-form">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-bold mb-2"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      value={inputs.email}
-                      onChange={handleInput}
-                      disabled={loading}
-                      className={`w-full px-4 py-2 border ${
-                        errors.email.required
-                          ? "border-red-500"
-                          : "border-gray-300"
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                    />
-                    {errors.email.required && (
-                      <span className="text-red-500 text-sm">
-                        Email is required.
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="mb-4">
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-bold mb-2"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      value={inputs.password}
-                      onChange={handleInput}
-                      disabled={loading}
-                      className={`w-full px-4 py-2 border ${
-                        errors.password.required
-                          ? "border-red-500"
-                          : "border-gray-300"
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                    />
-                    {errors.password.required && (
-                      <span className="text-red-500 text-sm">
-                        Password is required.
-                      </span>
-                    )}
-                    <div className="mt-2 text-right">
-                      <Link
-                        to="/forgotPassword"
-                        className="text-blue-500 text-sm"
-                      >
-                        Forgot Password?
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="mb-4">
-                    {loading && (
-                      <div className="text-center my-4">
-                        <div className="animate-spin inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-                      </div>
-                    )}
-                    {errors.custom_error && (
-                      <div className="text-red-500 text-center">
-                        <p>{errors.custom_error}</p>
-                      </div>
-                    )}
-                    <input
-                      type="submit"
-                      value="Login"
-                      disabled={loading}
-                      className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer"
-                    />
-                  </div>
-
-                  <div className="text-center mt-4">
-                    <p>
-                      Create a new account? Please{" "}
-                      <Link to="/register" className="text-blue-500">
-                        Register
-                      </Link>
-                    </p>
-                  </div>
-                </form>
+     <section className="min-h-screen flex items-center justify-center bg-hero-pattern">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <div className="w-full max-w-md bg-slate-200 p-8 rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold text-center mb-6">Login Now</h2>
+            <form onSubmit={handleSubmit} className="login-form">
+              <div className="mb-4">
+                <TextField
+                  label="Email"
+                  variant="outlined"
+                  fullWidth
+                  name="email"
+                  value={inputs.email}
+                  onChange={handleInput}
+                  disabled={loading}
+                  error={!!errors.email.required}
+                  helperText={errors.email.required ? 'Email is required.' : ''}
+                />
               </div>
-            </div>
+
+              <div className="mb-4">
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
+                  type="password"
+                  name="password"
+                  value={inputs.password}
+                  onChange={handleInput}
+                  disabled={loading}
+                  error={!!errors.password.required}
+                  helperText={errors.password.required ? 'Password is required.' : ''}
+                />
+                <div className="mt-2 text-right">
+                  <Link to="/forgotPassword" className="text-blue-500 text-sm">
+                    Forgot Password?
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                {loading && (
+                  <div className="text-center my-4">
+                    <CircularProgress />
+                  </div>
+                )}
+                {errors.custom_error && (
+                  <div className="text-red-500 text-center">
+                    <p>{errors.custom_error}</p>
+                  </div>
+                )}
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  disabled={loading}
+                  className="mt-4"
+                >
+                  Login
+                </Button>
+              </div>
+
+              <div className="text-center mt-4">
+                <p>
+                  Create a new account? Please{' '}
+                  <Link to="/register" className="text-blue-500">
+                    Register
+                  </Link>
+                </p>
+              </div>
+            </form>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
       </div>
 
       <Footer />

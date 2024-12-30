@@ -5,6 +5,7 @@ import Home from "../assets/Home.webp";
 import { userDetailsRegister } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 function UserDetailsRegister() {
   const initialState = {
@@ -450,178 +451,154 @@ function UserDetailsRegister() {
         }}
       >
         {!loading ? (
-          <section className="py-20 bg-hero-pattern min-h-screen flex items-center">
-            <div className="container mx-auto px-4">
-              <div className="flex justify-center">
-                <div className="w-full max-w-4xl bg-slate-200 p-8 shadow-md rounded-lg">
-                  <h2 className="text-center text-2xl font-bold mb-6">
-                    Register Animal Owner
-                  </h2>
-                  <form
-                    onSubmit={handleSubmit}
-                    className="grid grid-cols-2 gap-4"
-                  >
-                    {/* Name */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        name="Name"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      />
-                      {errors.Name && errors.Name.required && (
-                        <span className="text-red-500 text-sm">
-                          Name is required.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Contact Number */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        Contact Number
-                      </label>
-                      <input
-                        type="text"
-                        name="contactNumber"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      />
-                      {errors.contactNumber &&
-                        errors.contactNumber.required && (
-                          <span className="text-red-500 text-sm">
-                            Contact Number is required.
-                          </span>
-                        )}
-                    </div>
-
-                    {/* Contact Email */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        Contact Email
-                      </label>
-                      <input
-                        type="email"
-                        name="contactEmail"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      />
-                      {errors.contactEmail && errors.contactEmail.required && (
-                        <span className="text-red-500 text-sm">
-                          Email is required.
-                        </span>
-                      )}
-                      {errors.contactEmail && errors.contactEmail.invalid && (
-                        <span className="text-red-500 text-sm">
-                          Invalid email format.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Address */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        Address
-                      </label>
-                      <input
-                        type="text"
-                        name="Address"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      />
-                      {errors.Address && errors.Address.required && (
-                        <span className="text-red-500 text-sm">
-                          Address is required.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* State */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        State
-                      </label>
-                      <select
-                        name="State"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      >
-                        <option value="">Select a state</option>
-                        {Object.keys(statesAndDistricts).map((state) => (
-                          <option key={state} value={state}>
-                            {state}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.State && errors.State.required && (
-                        <span className="text-red-500 text-sm">
-                          State is required.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* District */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        District
-                      </label>
-                      <select
-                        name="District"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                        disabled={!inputs.State}
-                      >
-                        <option value="">Select a district</option>
-                        {inputs.State &&
-                          statesAndDistricts[inputs.State]?.map((district) => (
-                            <option key={district} value={district}>
-                              {district}
-                            </option>
-                          ))}
-                      </select>
-                      {errors.District && errors.District.required && (
-                        <span className="text-red-500 text-sm">
-                          District is required.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Pincode */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold">
-                        Pincode
-                      </label>
-                      <input
-                        type="text"
-                        name="Pincode"
-                        onChange={handleInput}
-                        className="form-control w-full p-2 border border-gray-300 rounded mt-1"
-                      />
-                      {errors.Pincode && errors.Pincode.required && (
-                        <span className="text-red-500 text-sm">
-                          Pincode is required.
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Submit Button */}
-                    <div className="col-span-2 text-center">
-                      <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-                        disabled={loading}
-                      >
-                        {loading ? "Submitting..." : "Submit"}
-                      </button>
-                    </div>
-                  </form>
+        <section className="py-20 bg-hero-pattern min-h-screen flex items-center">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <div className="w-full max-w-4xl bg-slate-200 p-8 shadow-md rounded-lg">
+              <h2 className="text-center text-2xl font-bold mb-6">
+                Register Animal Owner
+              </h2>
+              <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+                
+                {/* Name */}
+                <div>
+                  <TextField
+                    label="Name"
+                    name="Name"
+                    onChange={handleInput}
+                    fullWidth
+                    variant="outlined"
+                    error={Boolean(errors.Name?.required)}
+                    helperText={errors.Name?.required && 'Name is required.'}
+                  />
                 </div>
-              </div>
+      
+                {/* Contact Number */}
+                <div>
+                  <TextField
+                    label="Contact Number"
+                    name="contactNumber"
+                    onChange={handleInput}
+                    fullWidth
+                    variant="outlined"
+                    error={Boolean(errors.contactNumber?.required)}
+                    helperText={errors.contactNumber?.required && 'Contact Number is required.'}
+                  />
+                </div>
+      
+                {/* Contact Email */}
+                <div>
+                  <TextField
+                    label="Contact Email"
+                    type="email"
+                    name="contactEmail"
+                    onChange={handleInput}
+                    fullWidth
+                    variant="outlined"
+                    error={Boolean(errors.contactEmail?.required || errors.contactEmail?.invalid)}
+                    helperText={
+                      errors.contactEmail?.required
+                        ? 'Email is required.'
+                        : errors.contactEmail?.invalid
+                        ? 'Invalid email format.'
+                        : ''
+                    }
+                  />
+                </div>
+      
+                {/* Address */}
+                <div>
+                  <TextField
+                    label="Address"
+                    name="Address"
+                    onChange={handleInput}
+                    fullWidth
+                    variant="outlined"
+                    error={Boolean(errors.Address?.required)}
+                    helperText={errors.Address?.required && 'Address is required.'}
+                  />
+                </div>
+      
+                {/* State */}
+                <div>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>State</InputLabel>
+                    <Select
+                      label="State"
+                      name="State"
+                      onChange={handleInput}
+                      value={inputs.State}
+                      error={Boolean(errors.State?.required)}
+                    >
+                      <MenuItem value="">Select a state</MenuItem>
+                      {Object.keys(statesAndDistricts).map((state) => (
+                        <MenuItem key={state} value={state}>
+                          {state}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {errors.State?.required && (
+                      <span className="text-red-500 text-sm">State is required.</span>
+                    )}
+                  </FormControl>
+                </div>
+      
+                {/* District */}
+                <div>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>District</InputLabel>
+                    <Select
+                      label="District"
+                      name="District"
+                      onChange={handleInput}
+                      value={inputs.District}
+                      disabled={!inputs.State}
+                      error={Boolean(errors.District?.required)}
+                    >
+                      <MenuItem value="">Select a district</MenuItem>
+                      {inputs.State &&
+                        statesAndDistricts[inputs.State]?.map((district) => (
+                          <MenuItem key={district} value={district}>
+                            {district}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                    {errors.District?.required && (
+                      <span className="text-red-500 text-sm">District is required.</span>
+                    )}
+                  </FormControl>
+                </div>
+      
+                {/* Pincode */}
+                <div>
+                  <TextField
+                    label="Pincode"
+                    name="Pincode"
+                    onChange={handleInput}
+                    fullWidth
+                    variant="outlined"
+                    error={Boolean(errors.Pincode?.required)}
+                    helperText={errors.Pincode?.required && 'Pincode is required.'}
+                  />
+                </div>
+      
+                {/* Submit Button */}
+                <div className="col-span-2 text-center">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    disabled={loading}
+                  >
+                    {loading ? 'Submitting...' : 'Submit'}
+                  </Button>
+                </div>
+              </form>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
         ) : (
           <Loader />
         )}

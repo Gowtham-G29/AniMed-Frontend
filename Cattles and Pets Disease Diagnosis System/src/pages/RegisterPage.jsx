@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
 import { signup } from "../services/api";
+import { Button, CircularProgress, TextField } from "@mui/material";
 
 function Register() {
   const initialState = {
@@ -82,8 +83,6 @@ function Register() {
         passwordConfirm: inputs.passwordConfirm,
       });
 
-      
-
       if (response.data.token && response.data.newUser.role === "veternarian") {
         setLoading(false);
         navigate("/vetDoctorDetailsRegister");
@@ -94,7 +93,7 @@ function Register() {
       }
     } catch (err) {
       setLoading(false);
-       console.log(err); 
+      console.log(err);
     }
   };
 
@@ -119,126 +118,111 @@ function Register() {
                 </h2>
                 <form onSubmit={handleSubmit} className="register-form">
                   <div className="form-group mb-4">
-                    <label
-                      htmlFor="name"
-                      className="block text-gray-700 font-semibold"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                    <TextField
+                      label="Name"
+                      variant="outlined"
+                      fullWidth
                       name="name"
                       id="name"
                       onChange={handleInput}
                       disabled={loading}
+                      error={!!errors.name.required}
+                      helperText={
+                        errors.name.required ? "Name is required." : ""
+                      }
                     />
-                    {errors.name.required && (
-                      <span className="text-red-500 text-sm">
-                        Name is required.
-                      </span>
-                    )}
                   </div>
 
                   <div className="form-group mb-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-gray-700 font-semibold"
-                    >
-                      Email
-                    </label>
-                    <input
+                    <TextField
+                      label="Email"
+                      variant="outlined"
+                      fullWidth
                       type="email"
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
                       name="email"
                       id="email"
                       onChange={handleInput}
                       disabled={loading}
+                      error={!!errors.email.required || !!errors.email.invalid}
+                      helperText={
+                        errors.email.required
+                          ? "Email is required."
+                          : errors.email.invalid
+                            ? "Enter a valid email address."
+                            : ""
+                      }
                     />
-                    {errors.email.required && (
-                      <span className="text-red-500 text-sm">
-                        Email is required.
-                      </span>
-                    )}
-                    {errors.email.invalid && (
-                      <span className="text-red-500 text-sm">
-                        Enter a valid email address.
-                      </span>
-                    )}
                   </div>
 
                   <div className="form-group mb-4">
-                    <label className="block text-gray-700 font-semibold">
-                      Identity
-                    </label>
-                    <select
+                    <TextField
+                      label="Identity"
+                      variant="outlined"
+                      fullWidth
+                      select
                       name="role"
-                      onChange={handleInput}
                       value={inputs.role}
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
+                      onChange={handleInput}
+                      disabled={loading}
+                      SelectProps={{
+                        native: true,
+                      }}
                     >
                       <option value="user">User</option>
                       <option value="veternarian">Veternarian</option>
-                    </select>
+                    </TextField>
                   </div>
 
                   <div className="form-group mb-4">
-                    <label
-                      htmlFor="password"
-                      className="block text-gray-700 font-semibold"
-                    >
-                      Password
-                    </label>
-                    <input
+                    <TextField
+                      label="Password"
+                      variant="outlined"
+                      fullWidth
                       type="password"
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
                       name="password"
                       id="password"
                       onChange={handleInput}
                       disabled={loading}
+                      error={
+                        !!errors.password.required || !!errors.password.weak
+                      }
+                      helperText={
+                        errors.password.required
+                          ? "Password is required."
+                          : errors.password.weak
+                            ? "Password should be at least 6 characters."
+                            : ""
+                      }
                     />
-                    {errors.password.required && (
-                      <span className="text-red-500 text-sm">
-                        Password is required.
-                      </span>
-                    )}
-                    {errors.password.weak && (
-                      <span className="text-red-500 text-sm">
-                        Password should be at least 6 characters.
-                      </span>
-                    )}
                   </div>
 
                   <div className="form-group mb-4">
-                    <label
-                      htmlFor="passwordConfirm"
-                      className="block text-gray-700 font-semibold"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
+                    <TextField
+                      label="Confirm Password"
+                      variant="outlined"
+                      fullWidth
                       type="password"
-                      className="form-control w-full p-2 border border-gray-300 rounded mt-1"
                       name="passwordConfirm"
                       id="passwordConfirm"
                       onChange={handleInput}
                       disabled={loading}
+                      error={
+                        !!errors.passwordConfirm.required ||
+                        !!errors.passwordConfirm.mismatch
+                      }
+                      helperText={
+                        errors.passwordConfirm.required
+                          ? "Confirm Password is required."
+                          : errors.passwordConfirm.mismatch
+                            ? "Passwords do not match."
+                            : ""
+                      }
                     />
-                    {errors.passwordConfirm.required && (
-                      <span className="text-red-500 text-sm">
-                        Confirm Password is required.
-                      </span>
-                    )}
-                    {errors.passwordConfirm.mismatch && (
-                      <span className="text-red-500 text-sm">
-                        Passwords do not match.
-                      </span>
-                    )}
                   </div>
 
                   {loading && (
                     <div className="text-center my-4">
-                      <div className="animate-spin inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+                      <CircularProgress />
                     </div>
                   )}
 
@@ -248,12 +232,16 @@ function Register() {
                     </div>
                   )}
 
-                  <input
+                  <Button
                     type="submit"
-                    className="btn bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded mt-4 cursor-pointer"
-                    value="Register"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
                     disabled={loading}
-                  />
+                    className="mt-4"
+                  >
+                    Register
+                  </Button>
 
                   <div className="text-center text-sm mt-4">
                     Already have an account?{" "}

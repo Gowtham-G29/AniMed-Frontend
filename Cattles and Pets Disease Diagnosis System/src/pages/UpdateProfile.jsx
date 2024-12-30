@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useEffect } from "react";
 
-function UserAccount() {
+function UpdateProfile() {
   const [name, setName] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -168,8 +168,8 @@ function UserAccount() {
 
   return (
     <>
-    <NavBar2/>
-    <div className="min-h-screen bg-gray-500 flex justify-center items-center px-4 py-8 sm:px-6 md:px-8">
+    
+    <div className="min-h-scree flex justify-center items-center px-4 py-8 sm:px-6 md:px-8">
       <div className="flex flex-col lg:flex-row bg-white shadow-lg rounded-lg w-full max-w-6xl">
         <div className="w-full lg:w-1/2 p-8 border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col justify-center items-center">
           <div className="relative mb-6">
@@ -178,19 +178,6 @@ function UserAccount() {
               src={photo ? URL.createObjectURL(photo) : "img/user.jpg"} // Preview the selected photo
               alt="User photo"
             />
-          </div>
-          <div className="text-center mt-4 w-full">
-            <h2 className="text-2xl font-semibold mb-2">{name}</h2>
-            <p className="text-lg text-gray-600 mb-4">{email}</p>
-            <p className="text-lg text-gray-600 mb-4">User ID: {userId}</p>
-
-            <p className="text-lg text-grey-800 mb-4">
-              Account status: {status}
-            </p>
-
-            <div className="text-lg mb-4">
-              <span className="font-medium">Activities Recorded: {actvityCount}</span>
-            </div>
           </div>
           <div className="text-center mt-4 w-full">
             <Button
@@ -344,9 +331,8 @@ function UserAccount() {
         </div>
       </div>
     </div>
-    <Footer/>
    </>
   );
 }
 
-export default UserAccount;
+export default UpdateProfile;

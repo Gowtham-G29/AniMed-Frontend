@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Divider, Avatar } from "@mui/material";
 import Loader from "../components/Loader";
@@ -42,7 +43,10 @@ const UserAccountOverview = () => {
     { label: "Phone", value: userData.data.AnimalOwner.contactNumber || "N/A" },
     { label: "Telephone", value: userData.data.AnimalOwner.telephoneNumber || "N/A" },
     { label: "Address", value: userData.data.AnimalOwner.Address || "N/A" },
-    { label: "Account Holder Status", value: userData.data.AnimalOwner.role || "N/A" },
+    { label: "District", value: userData.data.AnimalOwner.district || "N/A" },
+    { label: "State", value: userData.data.AnimalOwner.state || "N/A" },
+    { label: "Country", value: userData.data.AnimalOwner.country || "N/A" },
+
 
     
   ] : [];
@@ -53,7 +57,7 @@ const UserAccountOverview = () => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
-      overflow="hidden"
+      // overflow="hidden"
     >
       <Box
         display="flex"
@@ -62,7 +66,7 @@ const UserAccountOverview = () => {
         height="90vh" // Full height with some margin
         maxWidth="1200px" // Max width for larger screens
         maxHeight="800px" // Max height for larger screens
-        overflow="hidden"
+        // overflow="hidden"
         bgcolor="white" // Card background color
         p={3}
       >
