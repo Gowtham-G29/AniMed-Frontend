@@ -89,7 +89,12 @@ const DemoPageContent = ({ pathname, router }) => {
 
       {pathname === "/YourAnimals/doctorSuggesitions" && (
         <>
-          <Typography variant="h4" color="primary" marginBottom="50px">
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
             Doctors Suggestions
           </Typography>
           <SuggestionList />
@@ -98,8 +103,13 @@ const DemoPageContent = ({ pathname, router }) => {
 
       {pathname === "/YourAnimals/ViewLogs" && (
         <>
-          <Typography variant="h4" color="primary" marginBottom="50px">
-            Register Logs
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
+            Registered Logs
           </Typography>
           <AnimalDataTable />
         </>
@@ -114,7 +124,19 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/Account/viewProfile" && <UserAccountOverview />}
+      {pathname === "/Account/viewProfile" && (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
+            User Info
+          </Typography>
+          <UserAccountOverview />
+        </>
+      )}
 
       {pathname === "/Home" && (
         <>
@@ -157,7 +179,17 @@ const DemoPageContent = ({ pathname, router }) => {
                 <AnimalImageListFarm setAnimalSpecies={setAnimalSpecies} />
               )}
               {(animalType === "initial" || animalRegStatus) && (
-                <AnimalTypeSelect animalType={setAnimalType} />
+                <>
+                  <Typography
+                    variant="h4"
+                    color="primary"
+                    marginBottom="50px"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    Choose Animal Type
+                  </Typography>
+                  <AnimalTypeSelect animalType={setAnimalType} />
+                </>
               )}
             </>
           )}
@@ -215,21 +247,16 @@ const MEDICALHELP_NAVIGATION = [
   },
 ];
 
-
-
 function DashboardLayoutNavigationActions() {
   const navigate = useNavigate();
 
   const router = useDemoRouter("Home");
-  
+
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate("/");
     }
   }, [navigate]);
-
-
- 
 
   return (
     <AppProvider

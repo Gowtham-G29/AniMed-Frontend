@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import { AnimatedName } from "./AnimatedName";
 import { useEffect } from "react";

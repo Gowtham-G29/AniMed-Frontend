@@ -21,9 +21,7 @@ export default function AnimalTypeSelect({ animalType }) {
     >
       <div className="w-full pt-0 p-28  overflow-y-hidden  ">
         <div className="flex flex-col items-center h-screen ">
-          <h1 className="text-2xl mt-0 font-bold  pt-0 text-blue-500">
-            Choose Animal Type
-          </h1>
+         
           <div className="flex flex-col md:flex-row justify-center items-center h-screen space-y-4 md:space-y-0 md:space-x-4 ">
             <Box
               sx={{
