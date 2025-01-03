@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { Transition } from "react-transition-group";
 import { useTheme } from "@mui/system";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import { Snackbar } from "@mui/base/Snackbar";
+import { Snackbar } from '@mui/base/Snackbar';
 
 function useIsDarkMode() {
   const theme = useTheme();
@@ -64,7 +65,7 @@ export default function AnimalRegisterSnackBar({ setanimalRegStatus }) {
                   Animal Registration is Successful!
                 </p>
                 <p className="m-0 leading-normal font-normal text-slate-800 dark:text-slate-400">
-                  Please wait for the Doctor's reply!
+                  Please wait for the Doctor&apos;s reply!
                 </p>
               </div>
               <CloseIcon

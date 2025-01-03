@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import { Transition } from "react-transition-group";
 import { useTheme } from "@mui/system";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import { Snackbar } from "@mui/base/Snackbar";
 import { useEffect } from "react";
 import WarningIcon from '@mui/icons-material/Warning';
-
+import { Snackbar } from '@mui/base/Snackbar';
 function useIsDarkMode() {
   const theme = useTheme();
   return theme.palette.mode === "dark";
