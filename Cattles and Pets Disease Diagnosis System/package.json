@@ -20,9 +20,12 @@
     "@toolpad/core": "^0.11.0",
     "axios": "^1.7.9",
     "flowbite": "^2.5.2",
+    "leaflet": "^1.9.4",
+    "pigeon-maps": "^0.22.1",
     "preline": "^2.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
