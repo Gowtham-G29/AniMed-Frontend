@@ -20,6 +20,8 @@ import ErrorPage from "./components/ErrorPage";
 import LogoutModel from "./components/LogoutModel";
 import AnimalDataTable from "./components/DataTableAnimal";
 import SuggestionModel from "./components/SuggestionModel";
+import {  UserMap } from "./pages/UserMap";
+import DoctorContacts from "./components/DoctorContacts";
 
 export default function App() {
   return (
@@ -56,7 +58,8 @@ export default function App() {
           <Route path="/logout" element={<LogoutModel/>}/>
           <Route path="/dataTable" element={<AnimalDataTable/>}/>
           <Route path="/suggestion" element={<SuggestionModel/>}/>
-
+          <Route path="/map" element={<UserMap/>}/>
+          <Route path="/contacts" element={<DoctorContacts/>}/>         
         </Routes>
       </BrowserRouter>
     </>
