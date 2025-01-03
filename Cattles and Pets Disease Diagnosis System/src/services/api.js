@@ -187,7 +187,6 @@ export const getAnimalDetails = async () => {
     return response;
 
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -216,7 +215,79 @@ export const updateAnimal = async (inputs) => {
   } catch (error) {
     return error;
   }
+};
+
+export const getNearByDoctors = async (animalOwnerID) => {
+  console.log('Animal Owner ID:', animalOwnerID);
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getNearByDoctors`, {
+      params: { userID: animalOwnerID },
+      withCredentials: true
+    });
+    return response;
+  } catch (err) {
+
+    return err;
+  }
+};
+
+export const deactivateAccount = async () => {
+  try {
+
+    const response = await axios.patch(`${BASE_URL}/api/v1/users/deleteMe`, {}, {
+      withCredentials: true
+    });
+
+    console.log(response);
+
+    return response;
+
+  } catch (error) {
+
+    return error;
+  }
+};
+
+
+export const updateProfile = async (formData) => {
+  console.log(formData);
+  try {
+    const response = await axios.patch(`${BASE_URL}/api/v1/users/updateMe`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }, withCredentials: true
+    })
+
+    console.log(response);
+
+    return response;
+
+
+  } catch (error) {
+    console.log(error);
+
+    return error;
+
+  }
 }
+
+export const updateCurrentUserPassword = async (currentPassword, newPassword, confirmPassword) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}/api/v1/users/updateCurrentUserPassword`, {
+      passwordCurrent: currentPassword,
+      password: newPassword,
+      passwordConfirm: confirmPassword
+    }, { withCredentials: true });
+    console.log('res',response)
+    return response;
+
+  } catch (error) {
+
+    return error
+
+  }
+};
+
 
 
 

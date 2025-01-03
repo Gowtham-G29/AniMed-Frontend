@@ -29,6 +29,7 @@ function UserDashboardHomePage({ setregPageNavigate }) {
     <div
       className="hero min-h-screen"
       style={{
+        minHeight:'82vh',
         backgroundImage:
           "url(https://i.pinimg.com/736x/8e/73/77/8e73771f779f6303631c970586b0844b.jpg)",
       }}

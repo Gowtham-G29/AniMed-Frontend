@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Home from "../assets/Home.webp";
 import { login } from "../services/api";
 import { Button, CircularProgress, TextField } from "@mui/material";
-// import OAuthSignInPage from "../components/OauthComponent";
 
 function LoginPage() {
   const initialState = {
@@ -103,6 +102,8 @@ function LoginPage() {
   const handleInput = (event) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
+
+  
 
   return (
     <div>

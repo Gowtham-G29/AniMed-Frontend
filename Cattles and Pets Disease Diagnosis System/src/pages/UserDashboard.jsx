@@ -40,6 +40,11 @@ import LogoutImage from "../components/LogoutImage";
 import UpdateProfile from "./UpdateProfile";
 import AnimalDataTable from "../components/DataTableAnimal";
 import SuggestionList from "../components/SuggestionList";
+import SettingsRemoteIcon from "@mui/icons-material/SettingsRemote";
+import InfoIcon from "@mui/icons-material/Info";
+import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+import { UserMap } from "./UserMap";
+import DoctorContacts from "../components/DoctorContacts";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -87,6 +92,26 @@ const DemoPageContent = ({ pathname, router }) => {
     >
       {/* <Typography>{pathname}</Typography> */}
 
+      {pathname === "/MedicalHelp/contactDoctors" && (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
+            Nearby Doctors Contacts
+          </Typography>
+          <DoctorContacts />
+        </>
+      )}
+
+      {pathname === "/MedicalHelp/nearbyLocations" && (
+        <>
+          <UserMap />
+        </>
+      )}
+
       {pathname === "/YourAnimals/doctorSuggesitions" && (
         <>
           <Typography
@@ -115,7 +140,20 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/Account/updateAccount" && <UpdateProfile />}
+      {pathname === "/Account/updateAccount" && (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            Update Profile
+          </Typography><br />
+          <Typography variant="subtitle2">
+          <strong>NOTE*:</strong>All the Profile updations makes you to <strong>Logout</strong> automatically. These changes update the login credentials only. You need to login again to experience the changes.</Typography>
+          <UpdateProfile />
+        </>
+      )}
 
       {pathname === "/Account/Logout" && (
         <>
@@ -247,6 +285,24 @@ const MEDICALHELP_NAVIGATION = [
   },
 ];
 
+const DETECTION_DEVICE = [
+  {
+    segment: "PredictionLogs",
+    title: "Prediction Logs",
+    icon: <FormatListNumberedRtlIcon />,
+  },
+  {
+    segment: "doctorsuggestions",
+    title: "Doctor suggestions",
+    icon: <MedicationIcon />,
+  },
+  {
+    segment: "yourDeviceInfo",
+    title: "Your Device Info",
+    icon: <InfoIcon />,
+  },
+];
+
 function DashboardLayoutNavigationActions() {
   const navigate = useNavigate();
 
@@ -282,6 +338,12 @@ function DashboardLayoutNavigationActions() {
           title: "Medical Help",
           icon: <MedicalInformationIcon />,
           children: MEDICALHELP_NAVIGATION,
+        },
+        {
+          segment: "Detection Device",
+          title: "Detection Device",
+          icon: <SettingsRemoteIcon />,
+          children: DETECTION_DEVICE,
         },
         {
           kind: "divider",

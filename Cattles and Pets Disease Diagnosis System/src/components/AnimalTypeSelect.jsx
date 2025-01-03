@@ -9,7 +9,6 @@ export default function AnimalTypeSelect({ animalType }) {
 
   return (
     <ThemeProvider
-      
       theme={{
         palette: {
           primary: {
@@ -20,8 +19,7 @@ export default function AnimalTypeSelect({ animalType }) {
       }}
     >
       <div className="w-full pt-0 p-28  overflow-y-hidden  ">
-        <div className="flex flex-col items-center h-screen ">
-         
+        <div className="flex flex-col items-center  ">
           <div className="flex flex-col md:flex-row justify-center items-center h-screen space-y-4 md:space-y-0 md:space-x-4 ">
             <Box
               sx={{
@@ -29,7 +27,6 @@ export default function AnimalTypeSelect({ animalType }) {
                 height: 300,
                 borderRadius: 1,
                 marginRight: 3,
-  
                 backgroundImage:
                   'url("https://i.pinimg.com/236x/33/6b/91/336b915c15c456d29e1b78d4d7ec78c6.jpg")', // Replace with your image URL
                 backgroundSize: "cover",
