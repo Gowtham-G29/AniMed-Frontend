@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Home from "../assets/Home.webp";
 
 import {
   Stepper,
@@ -8,7 +8,6 @@ import {
   StepLabel,
   Button,
   TextField,
-  CircularProgress,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { animalDetailsRegister } from "../services/api";
