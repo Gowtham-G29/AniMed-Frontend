@@ -80,7 +80,7 @@ export const UserMap = () => {
 
   const customIcon2 = new L.Icon({
     iconUrl: "/src/assets/currentlocation.png",
-    iconSize: [30, 50],
+    iconSize: [40, 60],
     iconAnchor: [15, 50],
   });
 

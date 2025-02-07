@@ -150,8 +150,8 @@ const DemoPageContent = ({ pathname, router }) => {
           >
             Update Profile
           </Typography><br />
-          <Typography variant="subtitle2">
-          <strong>NOTE*:</strong>All the Profile updations makes you to <strong>Logout</strong> automatically. These changes update the login credentials only. You need to login again to experience the changes.</Typography>
+          <Typography variant="subtitle2" className="text-slate-500">
+          <strong className="text-black">NOTE*:</strong>All the Profile updations makes you to <strong>Logout</strong> automatically. These changes update the login credentials only. You need to login again to experience the changes.</Typography>
           <UpdateProfile />
         </>
       )}

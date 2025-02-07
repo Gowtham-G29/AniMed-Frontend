@@ -177,6 +177,14 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/diseasedAnimals/location" && (
         <>
+          <Typography
+            variant="h4"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            Patients Locations
+          </Typography>
+          <br />
           <Typography variant="subtitle-3">
             <strong>Note*:</strong> The Patients Location in Map shown only the
             patients available in your nearby location/zone. <br />
@@ -200,6 +208,14 @@ function DemoPageContent({ pathname, router }) {
             />
           ) : (
             <>
+              <Typography
+                variant="h4"
+                color="primary"
+                style={{ fontWeight: "bold" }}
+              >
+                Patients List
+              </Typography>
+              <br />
               <Typography variant="subtitle-3">
                 <strong>Note*:</strong> The Patients list shows only the
                 patients available in your nearby location/zone. <br />
@@ -223,11 +239,30 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
 
-      {pathname === "/account/viewAccount" && <DoctorAccountOverview />}
+      {pathname === "/account/viewAccount" && <><Typography
+        variant="h4"
+        color="primary"
+        style={{ fontWeight: "bold" }}
+      >
+        User information
+      </Typography><br /><DoctorAccountOverview /></>}
 
       {pathname === "/account/updateAccount" && (
         <>
-          <Typography variant="subtitle2" className="text-slate-500"><strong className="text-black">Note*:</strong>The Account update only made changes in the login credentials .It will not affect your contact mail and other user informations. If you want to made any changes in user informations please contact administrator.  </Typography>
+          <Typography
+            variant="h4"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            Update Profile
+          </Typography>
+          <br />
+          <Typography variant="subtitle2" className="text-slate-500 px-3">
+            <strong className="text-black">Note*:</strong>The Account update
+            only made changes in the login credentials .It will not affect your
+            contact mail and other user informations. If you want to made any
+            changes in user informations please contact administrator.{" "}
+          </Typography>
           <UpdateProfile />
         </>
       )}
@@ -286,7 +321,6 @@ function DashboardLayoutBasic(props) {
 }
 
 DashboardLayoutBasic.propTypes = {
-  
   window: PropTypes.func,
 };
 
