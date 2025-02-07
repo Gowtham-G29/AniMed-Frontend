@@ -33,7 +33,11 @@ const UserAccountOverview = () => {
 
   const items = userData?.data?.AnimalOwner
     ? [
-        { label: "User ID", value: userData.data.AnimalOwner.userID || "N/A" },
+        {
+          label: "User ID",
+          value:
+            "us" + userData.data.AnimalOwner.userID.substring(1, 9) || "N/A",
+        },
         { label: "Name", value: userData.data.AnimalOwner.Name },
         {
           label: "Email",
@@ -58,42 +62,43 @@ const UserAccountOverview = () => {
     : [];
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="80vh"
-    >
+    <>
       <Box
         display="flex"
-        flexDirection="column"
-        width="90vw"
-        height="90vh"
-        maxWidth="1200px"
-        maxHeight="800px"
-        bgcolor="white"
-        p={3}
+        justifyContent="center"
+        alignItems="center"
+        minHeight="80vh"
       >
-        <Box display="flex" justifyContent="center" mb={3}>
-          <Avatar
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            alt="Profile Picture"
-            sx={{
-              width: 150,
-              height: 150,
-              border: "3px solid #e0e0e0",
-            }}
-          />
+        <Box
+          display="flex"
+          flexDirection="column"
+          width="90vw"
+          height="90vh"
+          maxWidth="1200px"
+          maxHeight="800px"
+          bgcolor="white"
+          p={3}
+        >
+          <Box display="flex" justifyContent="center" mb={3}>
+            <Avatar
+              src="https://i.pinimg.com/236x/e8/d7/d0/e8d7d05f392d9c2cf0285ce928fb9f4a.jpg"
+              alt="Profile Picture"
+              sx={{
+                width: 150,
+                height: 150,
+                border: "3px solid #e0e0e0",
+              }}
+            />
+          </Box>
+          {items.map((item, index) => (
+            <React.Fragment key={item.value}>
+              <DataListItem label={item.label} value={item.value} />
+              {index < items.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
         </Box>
-
-        {items.map((item, index) => (
-          <React.Fragment key={item.value}>
-            <DataListItem label={item.label} value={item.value} />
-            {index < items.length - 1 && <Divider />} {/* Horizontal divider */}
-          </React.Fragment>
-        ))}
       </Box>
-    </Box>
+    </>
   );
 };
 
