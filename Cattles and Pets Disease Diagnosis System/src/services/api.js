@@ -288,6 +288,95 @@ export const updateCurrentUserPassword = async (currentPassword, newPassword, co
   }
 };
 
+export const getNearbyAnimals=async()=>{
+  try {
+    const response=await axios.get(`${BASE_URL}/api/v1/users/getNearbyAnimals`,{
+      withCredentials:true
+    });
+
+    console.log("res ",response.data);
+
+    return response;
+  } catch (error) {
+
+    return error;
+    
+  }
+}
+
+export const updateDoctorSuggestions = async (inputs) => {
+  try {
+    const response = await axios.patch(
+      `${BASE_URL}/api/v1/animals/updateDoctorSuggestions`,
+      {
+        animalID:inputs.animalID,
+        doctorSuggestedStatus:inputs.doctorSuggestedStatus,
+        doctorSuggestions: {
+          medicine: inputs.medicine,
+          preventionMethods: inputs.preventionMethods,
+          remarks: inputs.remarks,
+          suggestedBy: inputs.suggestedBy,
+        },
+
+      },
+      { withCredentials: true }
+    );
+
+    return response;
+  } catch (error) {
+    console.error("Error updating doctor suggestions:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+
+export const getDoctorDetails = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getDoctorDetails`, {
+      withCredentials: true,
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    throw new Error(error);
+  }
+};
+
+export const getAnimalOwnerContacts=async(animalID)=>{
+  console.log(animalID);
+  try {
+    const response=await axios.get(`${BASE_URL}/api/v1/users/getAnimalOwnerContacts`,{
+      params: { _id: animalID  },
+      withCredentials: true
+    });
+
+    console.log("hi",response.data.ownerContact);
+    return response;
+    
+  } catch (error) {
+
+    return error;
+    
+  }
+}
+
+export const getVetDoctorDetails=async()=>{
+  try{
+    const response=await axios.get(`${BASE_URL}/api/v1/users/getVetDoctorDetails`,{
+      withCredentials:true
+    });
+
+    console.log(response);
+    return response;
+
+  }catch(error){
+    
+    return error;
+
+  }
+}
+
 
 
 
