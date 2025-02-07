@@ -45,6 +45,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
 import { UserMap } from "./UserMap";
 import DoctorContacts from "../components/DoctorContacts";
+import ComingSoon from "../components/ComingSoon";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -155,7 +156,7 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/Account/Logout" && (
+      {pathname === "/Logout" && (
         <>
           <LogoutImage />
           <LogoutModel handleNavigate={handleNavigate} />
@@ -233,6 +234,19 @@ const DemoPageContent = ({ pathname, router }) => {
           )}
         </>
       )}
+
+      {pathname==="/Detectiondevice/doctorsuggestions"&&(
+        <ComingSoon/>
+      )}
+
+      {pathname==="/Detectiondevice/PredictionLogs"&&(
+        <ComingSoon/>
+      )}
+
+      {pathname==="/Detectiondevice/yourDeviceInfo"&&(
+        <ComingSoon/>
+      )}
+  
     </Box>
   );
 };
@@ -252,11 +266,7 @@ const ACCOUNT_NAVIGATION = [
     title: "Update Account",
     icon: <UpgradeIcon />,
   },
-  {
-    segment: "Logout",
-    title: "Logout",
-    icon: <LogoutIcon />,
-  },
+ 
 ];
 
 const YOURANIMAL_NAVIGATION = [
@@ -340,7 +350,7 @@ function DashboardLayoutNavigationActions() {
           children: MEDICALHELP_NAVIGATION,
         },
         {
-          segment: "Detection Device",
+          segment: "Detectiondevice",
           title: "Detection Device",
           icon: <SettingsRemoteIcon />,
           children: DETECTION_DEVICE,
@@ -354,6 +364,11 @@ function DashboardLayoutNavigationActions() {
           title: "Account",
           icon: <Avatar />,
           children: ACCOUNT_NAVIGATION,
+        },
+        {
+          segment: "Logout",
+          title: "Logout",
+          icon: <LogoutIcon />,
         },
       ]}
       branding={{

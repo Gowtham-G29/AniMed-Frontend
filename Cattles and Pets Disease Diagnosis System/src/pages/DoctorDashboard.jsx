@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { createTheme } from "@mui/material/styles";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+// import { createTheme } from "@mui/material/styles";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LayersIcon from "@mui/icons-material/Layers";
@@ -12,20 +11,63 @@ import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
 import Logo from "../components/Logo";
 
+import PinDropIcon from "@mui/icons-material/PinDrop";
+import PetsIcon from "@mui/icons-material/Pets";
+// import ComingSoon from "../components/ComingSoon";
+import { DoctorMap } from "./DoctorMap";
+import AnimalDataTable2 from "../components/DataTableAnimals2";
+import DoctorDashboardHomePage from "../components/DoctorDashboardHomepage";
+import { useEffect, useState } from "react";
+import SuggestionForm from "../components/SuggestionForm";
+import SpeakerPhoneIcon from "@mui/icons-material/SpeakerPhone";
+import InfoIcon from "@mui/icons-material/Info";
+import PersonIcon from "@mui/icons-material/Person";
+import PreviewIcon from "@mui/icons-material/Preview";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import ComingSoon from "../components/ComingSoon";
+import LogoutModelDoctor from "../components/LogoutModelDoctor";
+import { isAuthenticated } from "../services/Auth";
+import { useNavigate } from "react-router-dom";
+import LogoutImageDoctor from "../components/LogoutImageDoctor";
+import UpdateProfile from "./UpdateProfile";
+import DoctorAccountOverview from "./DoctorAccountOverview";
+
 const NAVIGATION = [
   {
-    kind: "header",
-    title: "Main items",
+    segment: "diseasedAnimals",
+    title: "Diseased Animals",
+    icon: <PetsIcon />,
+    children: [
+      {
+        segment: "patientsList",
+        title: "Patients List",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "location",
+        title: "Patients Location",
+        icon: <PinDropIcon />,
+      },
+    ],
   },
   {
-    segment: "dashboard",
-    title: "Dashboard",
-    icon: <DashboardIcon />,
-  },
-  {
-    segment: "orders",
-    title: "Orders",
-    icon: <ShoppingCartIcon />,
+    segment: "detectiondevice",
+    title: "Detection Device",
+    icon: <SpeakerPhoneIcon />,
+    children: [
+      {
+        segment: "detectionDeviceList",
+        title: "Detection Device reports",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "deviceOwnersinfo",
+        title: "Device Users Info",
+        icon: <InfoIcon />,
+      },
+    ],
   },
   {
     kind: "divider",
@@ -56,25 +98,67 @@ const NAVIGATION = [
     title: "Integrations",
     icon: <LayersIcon />,
   },
+  {
+    kind: "divider",
+  },
+  {
+    kind: "header",
+    title: "Account",
+  },
+  {
+    segment: "account",
+    title: "Account Info",
+    icon: <PersonIcon />,
+    children: [
+      {
+        segment: "viewAccount",
+        title: "View Account",
+        icon: <PreviewIcon />,
+      },
+      {
+        segment: "updateAccount",
+        title: "Update Account",
+        icon: <UpgradeIcon />,
+      },
+    ],
+  },
+  {
+    segment: "logout",
+    title: "Logout",
+    icon: <LogoutIcon />,
+  },
 ];
 
-const demoTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "data-toolpad-color-scheme",
-  },
-  colorSchemes: { light: true, dark: true },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
+// const demoTheme = createTheme({
+//   cssVariables: {
+//     colorSchemeSelector: "data-toolpad-color-scheme",
+//   },
+//   colorSchemes: { light: true, dark: true },
+//   breakpoints: {
+//     values: {
+//       xs: 0,
+//       sm: 600,
+//       md: 600,
+//       lg: 1200,
+//       xl: 1536,
+//     },
+//   },
+// });
 
-function DemoPageContent({ pathname }) {
+function DemoPageContent({ pathname, router }) {
+  const [isOpenSuggestionForm, setOpenSuggestionForm] = useState(false);
+  const [animalID, setAnimalID] = useState(null);
+  const [animalDetails, setAnimalDetails] = useState([]);
+
+  console.log(isOpenSuggestionForm);
+
+  console.log("Hii", animalID);
+  console.log(animalDetails);
+
+  const handleNavigate = (route) => {
+    router.navigate(route);
+  };
+
   return (
     <Box
       sx={{
@@ -85,7 +169,75 @@ function DemoPageContent({ pathname }) {
         textAlign: "center",
       }}
     >
-      <Typography>Dashboard content for {pathname}</Typography>
+      {/* <Typography>{pathname}</Typography> */}
+
+      {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
+
+      {pathname === "/dashboard" && <DoctorDashboardHomePage />}
+
+      {pathname === "/diseasedAnimals/location" && (
+        <>
+          <Typography variant="subtitle-3">
+            <strong>Note*:</strong> The Patients Location in Map shown only the
+            patients available in your nearby location/zone. <br />
+            <strong className="text-red-500">Red</strong> marker indicates yours
+            (Doctor&apos;s) current location and{" "}
+            <strong className="text-blue-500">Blue </strong>
+            marker indicates the patients available in your nearby location.
+          </Typography>
+          <br />
+          <DoctorMap />
+        </>
+      )}
+
+      {pathname === "/diseasedAnimals/patientsList" && (
+        <>
+          {isOpenSuggestionForm ? (
+            <SuggestionForm
+              animalID={animalID}
+              setOpenSuggestionForm={setOpenSuggestionForm}
+              animalDetails={animalDetails}
+            />
+          ) : (
+            <>
+              <Typography variant="subtitle-3">
+                <strong>Note*:</strong> The Patients list shows only the
+                patients available in your nearby location/zone. <br />
+                <strong className="text-green-500">Green</strong> indicates the
+                issue is solved and{" "}
+                <strong className="text-red-500">Red </strong>
+                indicates issue not solved.
+              </Typography>
+              <br />
+              <AnimalDataTable2
+                setOpenSuggestionForm={setOpenSuggestionForm}
+                setAnimalID={setAnimalID}
+                setAnimalDetails={setAnimalDetails}
+              />
+            </>
+          )}
+        </>
+      )}
+
+      {pathname === "/detectiondevice/detectionDeviceList" && <ComingSoon />}
+
+      {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
+
+      {pathname === "/account/viewAccount" && <DoctorAccountOverview />}
+
+      {pathname === "/account/updateAccount" && (
+        <>
+          <Typography variant="subtitle2" className="text-slate-500"><strong className="text-black">Note*:</strong>The Account update only made changes in the login credentials .It will not affect your contact mail and other user informations. If you want to made any changes in user informations please contact administrator.  </Typography>
+          <UpdateProfile />
+        </>
+      )}
+
+      {pathname === "/logout" && (
+        <>
+          <LogoutImageDoctor />
+          <LogoutModelDoctor handleNavigate={handleNavigate} />
+        </>
+      )}
     </Box>
   );
 }
@@ -95,29 +247,36 @@ DemoPageContent.propTypes = {
 };
 
 function DashboardLayoutBasic(props) {
+  const navigate = useNavigate();
+
   const { window } = props;
 
   const router = useDemoRouter("/dashboard");
 
-  // Remove this const when copying and pasting into your project.
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const demoWindow = window !== undefined ? window() : undefined;
 
   return (
     // preview-start
-    <div className="bg-slate-200">
+    <div className="bg-white">
       <AppProvider
         navigation={NAVIGATION}
         router={router}
-        theme={demoTheme}
+        // theme={demoTheme}
         window={demoWindow}
         branding={{
           logo: <Logo />,
-          title: "Veternarian Dashboard",
+          title: " ",
           homeUrl: "/toolpad/core/introduction",
         }}
       >
         <DashboardLayout>
-          <DemoPageContent pathname={router.pathname} />
+          <DemoPageContent pathname={router.pathname} router={router} />
         </DashboardLayout>
       </AppProvider>
     </div>
@@ -127,10 +286,7 @@ function DashboardLayoutBasic(props) {
 }
 
 DashboardLayoutBasic.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
+  
   window: PropTypes.func,
 };
 
