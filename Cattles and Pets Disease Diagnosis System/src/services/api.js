@@ -238,7 +238,6 @@ export const deactivateAccount = async () => {
       withCredentials: true
     });
 
-    console.log(response);
 
     return response;
 
@@ -258,13 +257,11 @@ export const updateProfile = async (formData) => {
       }, withCredentials: true
     })
 
-    console.log(response);
 
     return response;
 
 
   } catch (error) {
-    console.log(error);
 
     return error;
 
@@ -278,7 +275,6 @@ export const updateCurrentUserPassword = async (currentPassword, newPassword, co
       password: newPassword,
       passwordConfirm: confirmPassword
     }, { withCredentials: true });
-    console.log('res',response)
     return response;
 
   } catch (error) {
@@ -294,7 +290,6 @@ export const getNearbyAnimals=async()=>{
       withCredentials:true
     });
 
-    console.log("res ",response.data);
 
     return response;
   } catch (error) {
@@ -351,7 +346,6 @@ export const getAnimalOwnerContacts=async(animalID)=>{
       withCredentials: true
     });
 
-    console.log("hi",response.data.ownerContact);
     return response;
     
   } catch (error) {
@@ -367,11 +361,41 @@ export const getVetDoctorDetails=async()=>{
       withCredentials:true
     });
 
-    console.log(response);
     return response;
 
   }catch(error){
     
+    return error;
+
+  }
+};
+
+
+export const autoLogin=async(token)=>{
+   try {
+    const response=await axios.get(`${BASE_URL}/api/v1/users/autoLogin`,{
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    return response;
+    
+   } catch (error) {
+
+    return error;
+
+   }
+}
+
+export const getRole=async(userID)=>{
+  try{
+    const response=await axios.get(`${BASE_URL}/api/v1/users/getRole`,{
+      params:{_id:userID}
+    });
+
+    return response;
+
+  }catch(error){
+
     return error;
 
   }
