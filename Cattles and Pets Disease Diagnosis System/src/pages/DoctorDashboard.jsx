@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 // import { createTheme } from "@mui/material/styles";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DescriptionIcon from "@mui/icons-material/Description";
-import LayersIcon from "@mui/icons-material/Layers";
+// import LayersIcon from "@mui/icons-material/Layers";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
@@ -33,11 +33,12 @@ import { useNavigate } from "react-router-dom";
 import LogoutImageDoctor from "../components/LogoutImageDoctor";
 import UpdateProfile from "./UpdateProfile";
 import DoctorAccountOverview from "./DoctorAccountOverview";
+import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
 
 const NAVIGATION = [
   {
-    segment: "diseasedAnimals",
-    title: "Diseased Animals",
+    segment: "diseasedAnimalsRecord",
+    title: "Disease Records",
     icon: <PetsIcon />,
     children: [
       {
@@ -70,34 +71,39 @@ const NAVIGATION = [
     ],
   },
   {
+    segment: "updateAboutDiseases",
+    title: "Update About Diseases",
+    icon: <PlaylistAddCircleIcon />,
+  },
+  {
     kind: "divider",
   },
   {
     kind: "header",
+    title: "Live stocks",
+  },
+  {
+    segment: "analytics",
     title: "Analytics",
-  },
-  {
-    segment: "reports",
-    title: "Reports",
     icon: <BarChartIcon />,
-    children: [
-      {
-        segment: "sales",
-        title: "Sales",
-        icon: <DescriptionIcon />,
-      },
-      {
-        segment: "traffic",
-        title: "Traffic",
-        icon: <DescriptionIcon />,
-      },
-    ],
+    // children: [
+    //   {
+    //     segment: "sales",
+    //     title: "Sales",
+    //     icon: <DescriptionIcon />,
+    //   },
+    //   {
+    //     segment: "traffic",
+    //     title: "Traffic",
+    //     icon: <DescriptionIcon />,
+    //   },
+    // ],
   },
-  {
-    segment: "integrations",
-    title: "Integrations",
-    icon: <LayersIcon />,
-  },
+  // {
+  //   segment: "integrations",
+  //   title: "Integrations",
+  //   icon: <LayersIcon />,
+  // },
   {
     kind: "divider",
   },
@@ -175,7 +181,7 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/dashboard" && <DoctorDashboardHomePage />}
 
-      {pathname === "/diseasedAnimals/location" && (
+      {pathname === "/diseasedAnimalsRecord/location" && (
         <>
           <Typography
             variant="h4"
@@ -198,7 +204,7 @@ function DemoPageContent({ pathname, router }) {
         </>
       )}
 
-      {pathname === "/diseasedAnimals/patientsList" && (
+      {(pathname==="/diseaseAnimalRecord"||pathname === "/diseasedAnimalsRecord/patientsList") && (
         <>
           {isOpenSuggestionForm ? (
             <SuggestionForm
@@ -235,17 +241,28 @@ function DemoPageContent({ pathname, router }) {
         </>
       )}
 
-      {pathname === "/detectiondevice/detectionDeviceList" && <ComingSoon />}
+      {(pathname === "/detectiondevice" ||
+        pathname === "/detectiondevice/detectionDeviceList") && <ComingSoon />}
 
       {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
 
-      {pathname === "/account/viewAccount" && <><Typography
-        variant="h4"
-        color="primary"
-        style={{ fontWeight: "bold" }}
-      >
-        User information
-      </Typography><br /><DoctorAccountOverview /></>}
+      {pathname==="/updateAboutDiseases"&&<ComingSoon/>}
+
+      {pathname === "/analytics" && <ComingSoon />}
+
+      {pathname === "/account/viewAccount" && (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            User information
+          </Typography>
+          <br />
+          <DoctorAccountOverview />
+        </>
+      )}
 
       {pathname === "/account/updateAccount" && (
         <>
