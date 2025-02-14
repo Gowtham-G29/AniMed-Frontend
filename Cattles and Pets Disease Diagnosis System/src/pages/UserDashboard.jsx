@@ -46,6 +46,7 @@ import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl
 import { UserMap } from "./UserMap";
 import DoctorContacts from "../components/DoctorContacts";
 import ComingSoon from "../components/ComingSoon";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -149,12 +150,19 @@ const DemoPageContent = ({ pathname, router }) => {
             style={{ fontWeight: "bold" }}
           >
             Update Profile
-          </Typography><br />
+          </Typography>
+          <br />
           <Typography variant="subtitle2" className="text-slate-500">
-          <strong className="text-black">NOTE*:</strong>All the Profile updations makes you to <strong>Logout</strong> automatically. These changes update the login credentials only. You need to login again to experience the changes.</Typography>
+            <strong className="text-black">NOTE*:</strong>All the Profile
+            updations makes you to <strong>Logout</strong> automatically. These
+            changes update the login credentials only. You need to login again
+            to experience the changes.
+          </Typography>
           <UpdateProfile />
         </>
       )}
+
+      {pathname==="/knowAboutDisease"&&<ComingSoon/>}
 
       {pathname === "/Logout" && (
         <>
@@ -235,18 +243,11 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname==="/Detectiondevice/doctorsuggestions"&&(
-        <ComingSoon/>
-      )}
+      {pathname === "/Detectiondevice/doctorsuggestions" && <ComingSoon />}
 
-      {pathname==="/Detectiondevice/PredictionLogs"&&(
-        <ComingSoon/>
-      )}
+      {pathname === "/Detectiondevice/PredictionLogs" && <ComingSoon />}
 
-      {pathname==="/Detectiondevice/yourDeviceInfo"&&(
-        <ComingSoon/>
-      )}
-  
+      {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />}
     </Box>
   );
 };
@@ -266,7 +267,6 @@ const ACCOUNT_NAVIGATION = [
     title: "Update Account",
     icon: <UpgradeIcon />,
   },
- 
 ];
 
 const YOURANIMAL_NAVIGATION = [
@@ -348,6 +348,11 @@ function DashboardLayoutNavigationActions() {
           title: "Medical Help",
           icon: <MedicalInformationIcon />,
           children: MEDICALHELP_NAVIGATION,
+        },
+        {
+          segment: "knowAboutDisease",
+          title: "Know About Disease",
+          icon: <TipsAndUpdatesIcon />,
         },
         {
           segment: "Detectiondevice",
