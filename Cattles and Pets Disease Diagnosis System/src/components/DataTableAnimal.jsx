@@ -43,7 +43,7 @@ function Row({ row, setRerender }) {
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
-          <Tooltip title="Additional De" arrow>
+          <Tooltip title="More Details" arrow>
             <IconButton
               aria-label="expand row"
               size="small"
