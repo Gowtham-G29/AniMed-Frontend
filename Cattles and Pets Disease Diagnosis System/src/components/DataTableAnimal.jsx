@@ -16,8 +16,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { deleteAnimal, getAnimalDetails } from "../services/api";
 import { useEffect, useState } from "react";
-import { Button, Tooltip } from "@mui/material";
+import {  Tooltip } from "@mui/material";
 import Loader from "./Loader";
+import DeleteLogButton from "./DeleteLogButton";
 
 function Row({ row, setRerender }) {
   const [open, setOpen] = React.useState(false);
@@ -388,13 +389,8 @@ function Row({ row, setRerender }) {
               )}
             </Box>
             <div className="flex justify-center m-5">
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleDeleteAnimal(row._id)}
-              >
-                Delete
-              </Button>
+              <DeleteLogButton
+              row={row} handleDeleteAnimal={handleDeleteAnimal} />
             </div>
           </Collapse>
         </TableCell>
