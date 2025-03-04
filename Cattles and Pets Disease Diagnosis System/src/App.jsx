@@ -22,6 +22,7 @@ import AnimalDataTable from "./components/DataTableAnimal";
 import SuggestionModel from "./components/SuggestionModel";
 import {  UserMap } from "./pages/UserMap";
 import DoctorContacts from "./components/DoctorContacts";
+import ApprovePanel from "./pages/ApprovePanel";
 
 export default function App() {
   return (
@@ -59,7 +60,8 @@ export default function App() {
           <Route path="/dataTable" element={<AnimalDataTable/>}/>
           <Route path="/suggestion" element={<SuggestionModel/>}/>
           <Route path="/map" element={<UserMap/>}/>
-          <Route path="/contacts" element={<DoctorContacts/>}/>         
+          <Route path="/contacts" element={<DoctorContacts/>}/>   
+          <Route path="/approvePanel" element={<ApprovePanel/>}/>      
         </Routes>
       </BrowserRouter>
     </>

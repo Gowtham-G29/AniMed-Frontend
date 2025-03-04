@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Default (light theme)
 body {
     --bg-color: white;

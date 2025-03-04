@@ -47,6 +47,7 @@ import { UserMap } from "./UserMap";
 import DoctorContacts from "../components/DoctorContacts";
 import ComingSoon from "../components/ComingSoon";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import DiseaseImageUpload from "../components/DiseasePrediction";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -92,7 +93,7 @@ const DemoPageContent = ({ pathname, router }) => {
         textAlign: "center",
       }}
     >
-      {/* <Typography>{pathname}</Typography> */}
+      <Typography>{pathname}</Typography>
 
       {pathname === "/MedicalHelp/contactDoctors" && (
         <>
@@ -162,7 +163,7 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname==="/knowAboutDisease"&&<ComingSoon/>}
+      {pathname === "/knowAboutDisease" && <ComingSoon />}
 
       {pathname === "/Logout" && (
         <>
@@ -248,6 +249,8 @@ const DemoPageContent = ({ pathname, router }) => {
       {pathname === "/Detectiondevice/PredictionLogs" && <ComingSoon />}
 
       {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />}
+      
+      {pathname === "/prediction" && <DiseaseImageUpload />}
     </Box>
   );
 };
@@ -359,6 +362,11 @@ function DashboardLayoutNavigationActions() {
           title: "Detection Device",
           icon: <SettingsRemoteIcon />,
           children: DETECTION_DEVICE,
+        },
+        {
+          segment: "prediction",
+          title: "Disease Prediction",
+          icon: <TipsAndUpdatesIcon />,
         },
         {
           kind: "divider",

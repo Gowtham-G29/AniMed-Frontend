@@ -401,6 +401,20 @@ export const getRole=async(userID)=>{
   }
 }
 
+export const approveDoctors=async()=>{
+  try{
+    const response=await axios.get(`${BASE_URL}/api/v1/users/approveDoctors`);
+    console.log(response);
+    return response;
+
+  }catch(error){
+
+    return error;
+
+  }
+}
+
+
 
 
 
