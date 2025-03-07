@@ -32,7 +32,6 @@ export default function DoctorContacts() {
     try {
       const response = await getNearByDoctors(animalOwnerID);
       setDoctors(response.data.data);
-      console.log("Nearby doctors:", response.data.data);
     } catch (err) {
       console.error("Error fetching nearby doctors:", err);
     }

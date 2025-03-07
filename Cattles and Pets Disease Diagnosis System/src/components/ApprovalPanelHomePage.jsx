@@ -1,7 +1,7 @@
 
 import { AnimatedName } from "./AnimatedName";
 
-function DoctorDashboardHomePage() {
+function ApprovalAdminHomePage() {
 
 
   return (
@@ -10,7 +10,7 @@ function DoctorDashboardHomePage() {
       style={{
         minHeight:'82vh',
         backgroundImage:
-          "url(https://wallpapercave.com/wp/wp14189973.jpg)",
+          "url(https://i.pinimg.com/736x/20/fe/63/20fe632e1512e9226f101d7a30cab31e.jpg)",
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
@@ -22,7 +22,7 @@ function DoctorDashboardHomePage() {
               className="custom-class mr-3"
               delay={50} 
             />            <AnimatedName
-              text={'Doctor'}
+              text={'Admin'}
               className="custom-class"
               delay={50}
             />
@@ -33,4 +33,4 @@ function DoctorDashboardHomePage() {
   );
 }
 
-export default DoctorDashboardHomePage;
+export default ApprovalAdminHomePage;

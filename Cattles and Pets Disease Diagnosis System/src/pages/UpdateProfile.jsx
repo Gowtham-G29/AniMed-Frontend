@@ -55,8 +55,7 @@ function UpdateProfile() {
       const response = await updateProfile(formData);
       await handleLogout();
       setloading(false);
-
-      console.log(response);
+      return response;
     } catch (error) {
       setloading(false);
       console.error("Error updating profile", error);

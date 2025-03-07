@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar2 from "../components/NavBar2";
 import Home from "../assets/Home.webp";
-import { signup } from "../services/api";
+import { accountDeactivate, signup } from "../services/api";
 import { Button, CircularProgress, TextField } from "@mui/material";
 
 function Register() {
@@ -91,6 +91,19 @@ function Register() {
         setLoading(false);
         navigate("/userDetailsRegister");
       }
+
+      try{
+        if (response.data.token && response.data.newUser.role === "approveAdmin") {
+          setLoading(true);
+          accountDeactivate();
+          setLoading(false);
+          navigate("/404Error");
+        }
+      }catch(error){
+        console.log(error);
+      }
+     
+
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -170,6 +183,8 @@ function Register() {
                     >
                       <option value="user">User</option>
                       <option value="veternarian">Veternarian</option>
+                      <option value="approveAdmin">Admin</option>
+
                     </TextField>
                   </div>
 

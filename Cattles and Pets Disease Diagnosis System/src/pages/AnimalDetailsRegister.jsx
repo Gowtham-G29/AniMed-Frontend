@@ -202,7 +202,7 @@ function AnimalDetailsRegister({
   setanimalRegStatus,
   setanimalRegFail,
 }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const steps = [
     "Basic Details",
     "Medical History",
@@ -276,7 +276,6 @@ function AnimalDetailsRegister({
   };
 
   const handleNext = () => {
-    // Skip validation and directly move to the next step
     setActiveStep(activeStep + 1);
   };
 

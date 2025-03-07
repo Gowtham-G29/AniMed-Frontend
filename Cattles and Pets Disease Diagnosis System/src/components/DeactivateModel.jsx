@@ -19,7 +19,7 @@ function DeactivateModel({ setDeactivateModalOpen }) {
   const handleDeactivateAccount = async () => {
     try {
       const response = await deactivateAccount();
-      console.log(response);
+      return response;
     } catch (error) {
       console.error("Deactivation error:", error);
     }

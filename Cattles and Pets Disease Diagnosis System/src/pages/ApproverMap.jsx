@@ -5,10 +5,13 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Loader from "../components/Loader";
 import FloatingNavigationButton from "../components/FloatingNavigationButton";
-import { getAnimalOwnerDetails, getNearByDoctors } from "../services/api";
+import { approveDoctors } from "../services/api";
 
 const CenterMap = ({ currentLocation }) => {
   const map = useMap();
+
+
+  
 
   useEffect(() => {
     if (currentLocation) {
@@ -19,40 +22,35 @@ const CenterMap = ({ currentLocation }) => {
   return null;
 };
 
-export const UserMap = () => {
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [animalOwnerID, setAnimalOwnerID] = useState(null);
+export const ApproverMap = () => {
   const [navigateCurrent, setNavigateCurrent] = useState(false);
-  const [doctors, setDoctors] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  
+  const [doctorDetails,setDoctorDetails]=useState([]);
+  const [doctorStatus,setDoctorStatus]=useState([]);
 
-  const handleAnimalOwnerDetails = async () => {
-    try {
-      const response = await getAnimalOwnerDetails();
-      setAnimalOwnerID(response.data.AnimalOwner.userID);
-    } catch (error) {
-      console.error("Error fetching animal owner details:", error);
-    }
-  };
+   useEffect(() => {
+      const getDoctorDetails = async () => {
+        try {
+          const response = await approveDoctors();
+          setDoctorDetails(response.data.doctorDetails);
+          setDoctorStatus(response.data.doctors);
+        } catch (error) {
+          console.error("Error fetching doctor details:", error);
+        } 
+      };
+  
+      getDoctorDetails();
+    }, []);
+  
+    //  Filtering doctors based on status
+    const approvedDoctors = doctorDetails.filter((doctor) =>
+      doctorStatus.some(
+        (status) => status._id === doctor.userID && status.activate === true
+      )
+    );
+  
 
-  const handleDoctorsLocation = async (animalOwnerID) => {
-    try {
-      const response = await getNearByDoctors(animalOwnerID);
-      setDoctors(response.data.data);
-      return response;
-    } catch (err) {
-      console.error("Error fetching nearby doctors:", err);
-    }
-  };
-
-  useEffect(() => {
-    handleAnimalOwnerDetails();
-  }, []);
-
-  useEffect(() => {
-    if (animalOwnerID) {
-      handleDoctorsLocation(animalOwnerID);
-    }
-  }, [animalOwnerID]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -100,7 +98,7 @@ export const UserMap = () => {
               You are here <br />
             </Popup>
           </Marker>
-          {doctors.map((doctor, index) => {
+          {approvedDoctors.map((doctor, index) => {
             const { latitude, longitude } = doctor.geolocation;
             return (
               <Marker

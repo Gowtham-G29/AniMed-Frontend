@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { approveDoctors } from "../services/api";
 import Loader from "./Loader";
 import { Typography } from "@mui/material";
-import ApprovalRequiredDetailsModal from "./ApprovalRequiredDetailsModal";
-import ReportIcon from '@mui/icons-material/Report';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import ApprovedDoctorsDetailsModal from "./ApprovedDoctorsDetailsModal";
 
-function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
+function ApprovedRequestsCard({ setDoctorDetailsLength}) {
   const [doctorDetails, setDoctorDetails] = useState([]);
   const [doctorStatus, setDoctorStatus] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
   //  Filtering doctors based on status
   const filteredDoctors = doctorDetails.filter((doctor) =>
     doctorStatus.some(
-      (status) => status._id === doctor.userID && status.activate === false
+      (status) => status._id === doctor.userID && status.activate === true
     )
   );
 
@@ -53,11 +53,11 @@ function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
               {filteredDoctors.map((doctor) => (
                 <div
                   key={doctor._id}
-                  className="card w-96 shadow-sm bg-slate-300 m-6"
+                  className="card w-96 shadow-sm bg-slate-100 m-6"
                 >
                   <div className="card-body">
                     <span className="badge badge-xs badge-warning">
-                      {doctor.experience} years Experience <ReportIcon color="error"/>
+                      {doctor.experience} years Experience <VerifiedUserIcon color="success"/>
                     </span>
                     <div className="flex justify-between">
                       <h2 className="text-xl font-bold">{doctor.fullName}</h2>
@@ -67,13 +67,13 @@ function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
                     </div>
                     <div className="mt-6">
                       <button
-                        className="btn btn-primary btn-block"
+                        className="btn bg-green-400 btn-block"
                         onClick={() => {
                           setSelectedDoctor(doctor); // Set selected doctor
                           setModalOpen(true);
                         }}
                       >
-                        Verify & Approve
+                        View Details
                       </button>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
               variant="subtitle2"
               className="text-center text-gray-500 p-6"
             >
-              No Requests Found for Approvals
+              No Verified doctors Found !.
             </Typography>
           )}
         </>
@@ -93,15 +93,14 @@ function ApprovalRequestCard({ setDoctorDetailsLength,setRefreshPanel }) {
 
       {/*  Show the modal with selected doctor details */}
       {modalOpen && selectedDoctor && (
-        <ApprovalRequiredDetailsModal
+        <ApprovedDoctorsDetailsModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           doctorDetails={selectedDoctor} //  Pass only selected doctor
-          setRefreshPanel={setRefreshPanel}
         />
       )}
     </div>
   );
 }
 
-export default ApprovalRequestCard;
+export default ApprovedRequestsCard;

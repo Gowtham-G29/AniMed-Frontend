@@ -56,9 +56,9 @@ const SuggestionForm = ({ animalID, setOpenSuggestionForm, animalDetails }) => {
       try {
         setLoading(true);
         const response = await updateDoctorSuggestions(formData);
-        console.log("Update Successful:", response);
         setLoading(false);
         handleClose();
+        return response;
       } catch (error) {
         setLoading(false);
         console.error("Update Failed:", error);

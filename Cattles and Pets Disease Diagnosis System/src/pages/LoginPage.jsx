@@ -78,6 +78,14 @@ function LoginPage() {
         navigate('/vetDoctorDetailsRegister')
       }
 
+      if (response.data.token&&response.data.user.role==='approveAdmin') {
+        localStorage.clear();
+        localStorage.setItem("jwt", response.data.token);
+        navigate("/approvePanel");
+      }
+
+  
+
     } catch (err) {
       setLoading(false);
       console.log(err);

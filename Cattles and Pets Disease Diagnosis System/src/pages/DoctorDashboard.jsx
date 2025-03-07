@@ -34,6 +34,7 @@ import LogoutImageDoctor from "../components/LogoutImageDoctor";
 import UpdateProfile from "./UpdateProfile";
 import DoctorAccountOverview from "./DoctorAccountOverview";
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import DiseaseDetailsUpdateForm from "../components/DiseaseDetailsUpdateForm";
 
 const NAVIGATION = [
   {
@@ -156,10 +157,7 @@ function DemoPageContent({ pathname, router }) {
   const [animalID, setAnimalID] = useState(null);
   const [animalDetails, setAnimalDetails] = useState([]);
 
-  console.log(isOpenSuggestionForm);
-
-  console.log("Hii", animalID);
-  console.log(animalDetails);
+ 
 
   const handleNavigate = (route) => {
     router.navigate(route);
@@ -175,7 +173,7 @@ function DemoPageContent({ pathname, router }) {
         textAlign: "center",
       }}
     >
-      {/* <Typography>{pathname}</Typography> */}
+      <Typography>{pathname}</Typography>
 
       {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
 
@@ -246,7 +244,8 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
 
-      {pathname==="/updateAboutDiseases"&&<ComingSoon/>}
+      {pathname==="/updateAboutDiseases"&&
+      <DiseaseDetailsUpdateForm/>}
 
       {pathname === "/analytics" && <ComingSoon />}
 

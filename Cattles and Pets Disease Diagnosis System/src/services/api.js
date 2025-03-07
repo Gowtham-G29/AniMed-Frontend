@@ -43,7 +43,6 @@ export const signup = async (inputs) => {
 
 
 export const userDetailsRegister = async (inputs) => {
-  console.log(inputs)
   try {
 
     const response = await axios.post(
@@ -65,7 +64,6 @@ export const userDetailsRegister = async (inputs) => {
 
 
 
-    console.log(response);
     return response;
   } catch (error) {
 
@@ -75,7 +73,6 @@ export const userDetailsRegister = async (inputs) => {
 
 
 export const vetDoctorDetailsRegister = async (inputs) => {
-  console.log(inputs.longitude)
   try {
     const response = await axios.post(
       `${BASE_URL}/api/v1/users/vetDoctorDetailsRegister`,
@@ -108,7 +105,6 @@ export const vetDoctorDetailsRegister = async (inputs) => {
     );
 
 
-    console.log(response);
     return response;
 
   } catch (error) {
@@ -192,7 +188,6 @@ export const getAnimalDetails = async () => {
 };
 
 export const deleteAnimal = async (animalID) => {
-  console.log('id', animalID);
   try {
     const response = await axios.delete(`${BASE_URL}/api/v1/animals/deleteAnimal`, {
       data: { animalID },
@@ -218,7 +213,6 @@ export const updateAnimal = async (inputs) => {
 };
 
 export const getNearByDoctors = async (animalOwnerID) => {
-  console.log('Animal Owner ID:', animalOwnerID);
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/users/getNearByDoctors`, {
       params: { userID: animalOwnerID },
@@ -249,7 +243,6 @@ export const deactivateAccount = async () => {
 
 
 export const updateProfile = async (formData) => {
-  console.log(formData);
   try {
     const response = await axios.patch(`${BASE_URL}/api/v1/users/updateMe`, formData, {
       headers: {
@@ -284,10 +277,10 @@ export const updateCurrentUserPassword = async (currentPassword, newPassword, co
   }
 };
 
-export const getNearbyAnimals=async()=>{
+export const getNearbyAnimals = async () => {
   try {
-    const response=await axios.get(`${BASE_URL}/api/v1/users/getNearbyAnimals`,{
-      withCredentials:true
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getNearbyAnimals`, {
+      withCredentials: true
     });
 
 
@@ -295,7 +288,7 @@ export const getNearbyAnimals=async()=>{
   } catch (error) {
 
     return error;
-    
+
   }
 }
 
@@ -304,8 +297,8 @@ export const updateDoctorSuggestions = async (inputs) => {
     const response = await axios.patch(
       `${BASE_URL}/api/v1/animals/updateDoctorSuggestions`,
       {
-        animalID:inputs.animalID,
-        doctorSuggestedStatus:inputs.doctorSuggestedStatus,
+        animalID: inputs.animalID,
+        doctorSuggestedStatus: inputs.doctorSuggestedStatus,
         doctorSuggestions: {
           medicine: inputs.medicine,
           preventionMethods: inputs.preventionMethods,
@@ -338,76 +331,89 @@ export const getDoctorDetails = async () => {
   }
 };
 
-export const getAnimalOwnerContacts=async(animalID)=>{
-  console.log(animalID);
+export const getAnimalOwnerContacts = async (animalID) => {
   try {
-    const response=await axios.get(`${BASE_URL}/api/v1/users/getAnimalOwnerContacts`,{
-      params: { _id: animalID  },
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getAnimalOwnerContacts`, {
+      params: { _id: animalID },
       withCredentials: true
     });
 
     return response;
-    
+
   } catch (error) {
 
     return error;
-    
+
   }
 }
 
-export const getVetDoctorDetails=async()=>{
-  try{
-    const response=await axios.get(`${BASE_URL}/api/v1/users/getVetDoctorDetails`,{
-      withCredentials:true
+export const getVetDoctorDetails = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getVetDoctorDetails`, {
+      withCredentials: true
     });
 
     return response;
 
-  }catch(error){
-    
+  } catch (error) {
+
     return error;
 
   }
 };
 
 
-export const autoLogin=async(token)=>{
-   try {
-    const response=await axios.get(`${BASE_URL}/api/v1/users/autoLogin`,{
+export const autoLogin = async (token) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/autoLogin`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
     return response;
-    
-   } catch (error) {
 
-    return error;
-
-   }
-}
-
-export const getRole=async(userID)=>{
-  try{
-    const response=await axios.get(`${BASE_URL}/api/v1/users/getRole`,{
-      params:{_id:userID}
-    });
-
-    return response;
-
-  }catch(error){
+  } catch (error) {
 
     return error;
 
   }
 }
 
-export const approveDoctors=async()=>{
-  try{
-    const response=await axios.get(`${BASE_URL}/api/v1/users/approveDoctors`);
-    console.log(response);
+export const getRole = async (userID) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getRole`, {
+      params: { _id: userID }
+    });
+
     return response;
 
-  }catch(error){
+  } catch (error) {
+
+    return error;
+
+  }
+}
+
+export const approveDoctors = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/approveDoctors`);
+    return response;
+
+  } catch (error) {
+
+    return error;
+
+  }
+}
+
+export const activateDoctor = async (userID) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}/api/v1/users/activateDoctor`, {
+      _id: userID
+    });
+
+    return response;
+
+  } catch (error) {
 
     return error;
 

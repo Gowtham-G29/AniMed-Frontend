@@ -29,6 +29,8 @@ function HomePage() {
           navigate("/doctorDashboard");
         } else if (Role === "user") {
           navigate("/userDashboard");
+        }else if(Role==='approveAdmin'){
+          navigate('/approvePanel')
         }
       } catch (error) {
         console.error("Auto-login failed:", error);

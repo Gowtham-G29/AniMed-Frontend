@@ -21,9 +21,7 @@ export default function SuggestionList() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {suggestions.map((suggestion, index) => {
-        {
-          console.log(suggestion.doctorSuggestedStatus);
-        }
+        
         if (suggestion.doctorSuggestedStatus) {
           return <SuggestionCard key={index} suggestion={suggestion} />;
         }

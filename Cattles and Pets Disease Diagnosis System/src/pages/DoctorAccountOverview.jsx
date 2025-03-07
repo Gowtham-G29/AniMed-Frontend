@@ -14,7 +14,6 @@ const DoctorAccountOverview = () => {
     const fetchUserDetails = async () => {
       try {
         const userData = await getVetDoctorDetails();
-        console.log("Hello", userData.data.doctorInformations);
         setUserData(userData.data.doctorInformations);
         setLoading(false);
       } catch (error) {

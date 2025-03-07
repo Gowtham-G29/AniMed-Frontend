@@ -46,7 +46,6 @@ export const DoctorMap = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(position.coords);
           setCurrentLocation([latitude, longitude]);
         },
         (error) => {
