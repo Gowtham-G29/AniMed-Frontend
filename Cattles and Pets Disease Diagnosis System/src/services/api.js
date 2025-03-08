@@ -418,7 +418,42 @@ export const activateDoctor = async (userID) => {
     return error;
 
   }
+};
+
+export const updateDiseaseInformation = async (inputs) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/v1/diseaseInformation/updateDiseaseInformation`,
+      inputs
+    )
+    return response;
+
+  } catch (error) {
+    return error;
+
+  }
+};
+
+export const getDiseaseInfo = async (disease) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/diseaseInformation/getDiseaseInfo`, {
+      params: {
+        diseaseName:disease
+      }
+    })
+    return response;
+
+  } catch (error) {
+
+    console.log(error)
+
+    return error;
+
+  }
 }
+
+getDiseaseInfo('Anthrax');
+
+
 
 
 
