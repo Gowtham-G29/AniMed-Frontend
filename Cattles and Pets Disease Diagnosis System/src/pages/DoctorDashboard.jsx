@@ -33,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutImageDoctor from "../components/LogoutImageDoctor";
 import UpdateProfile from "./UpdateProfile";
 import DoctorAccountOverview from "./DoctorAccountOverview";
-import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import PlaylistAddCircleIcon from "@mui/icons-material/PlaylistAddCircle";
 import DiseaseDetailsUpdateForm from "../components/DiseaseDetailsUpdateForm";
 
 const NAVIGATION = [
@@ -157,8 +157,6 @@ function DemoPageContent({ pathname, router }) {
   const [animalID, setAnimalID] = useState(null);
   const [animalDetails, setAnimalDetails] = useState([]);
 
- 
-
   const handleNavigate = (route) => {
     router.navigate(route);
   };
@@ -173,7 +171,7 @@ function DemoPageContent({ pathname, router }) {
         textAlign: "center",
       }}
     >
-      <Typography>{pathname}</Typography>
+      {/* <Typography>{pathname}</Typography> */}
 
       {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
 
@@ -202,7 +200,8 @@ function DemoPageContent({ pathname, router }) {
         </>
       )}
 
-      {(pathname==="/diseaseAnimalRecord"||pathname === "/diseasedAnimalsRecord/patientsList") && (
+      {(pathname === "/diseaseAnimalRecord" ||
+        pathname === "/diseasedAnimalsRecord/patientsList") && (
         <>
           {isOpenSuggestionForm ? (
             <SuggestionForm
@@ -244,8 +243,9 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
 
-      {pathname==="/updateAboutDiseases"&&
-      <DiseaseDetailsUpdateForm/>}
+      {pathname === "/updateAboutDiseases" && (
+        <DiseaseDetailsUpdateForm handleNavigate={handleNavigate} />
+      )}
 
       {pathname === "/analytics" && <ComingSoon />}
 

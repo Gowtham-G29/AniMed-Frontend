@@ -48,6 +48,9 @@ import DoctorContacts from "../components/DoctorContacts";
 import ComingSoon from "../components/ComingSoon";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import DiseaseImageUpload from "../components/DiseasePrediction";
+import DiseaseInfoChatPage from "../components/DiseaseInfoChatBotPage";
+import DiseaseInfoChatBotSearchBar from "../components/DiseaseInfoChatBotSearchBar";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -71,6 +74,10 @@ const DemoPageContent = ({ pathname, router }) => {
   const [animalSpecies, setAnimalSpecies] = useState("");
   const [animalRegFail, setanimalRegFail] = useState(false);
 
+  const [diseaseName, setDiseaseName] = useState(null);
+
+  console.log(diseaseName);
+
   const handleNavigate = (route) => {
     if (route === "/Home") {
       setAnimalType("initial");
@@ -93,8 +100,6 @@ const DemoPageContent = ({ pathname, router }) => {
         textAlign: "center",
       }}
     >
-      <Typography>{pathname}</Typography>
-
       {pathname === "/MedicalHelp/contactDoctors" && (
         <>
           <Typography
@@ -162,8 +167,6 @@ const DemoPageContent = ({ pathname, router }) => {
           <UpdateProfile />
         </>
       )}
-
-      {pathname === "/knowAboutDisease" && <ComingSoon />}
 
       {pathname === "/Logout" && (
         <>
@@ -243,13 +246,22 @@ const DemoPageContent = ({ pathname, router }) => {
           )}
         </>
       )}
+      {pathname === "/knowAboutDisease" && (
+        <>
+          <DiseaseInfoChatPage diseaseName={diseaseName} />
+
+          <div className="fixed bottom-0  w-full bg-white p-2">
+            <DiseaseInfoChatBotSearchBar setDiseaseName={setDiseaseName} />
+          </div>
+        </>
+      )}
 
       {pathname === "/Detectiondevice/doctorsuggestions" && <ComingSoon />}
 
       {pathname === "/Detectiondevice/PredictionLogs" && <ComingSoon />}
 
       {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />}
-      
+
       {pathname === "/prediction" && <DiseaseImageUpload />}
     </Box>
   );
@@ -354,8 +366,8 @@ function DashboardLayoutNavigationActions() {
         },
         {
           segment: "knowAboutDisease",
-          title: "Know About Disease",
-          icon: <TipsAndUpdatesIcon />,
+          title: "Know About Disease (Chat bot)",
+          icon: <SmartToyIcon />,
         },
         {
           segment: "Detectiondevice",
