@@ -54,48 +54,69 @@ function LoginPage() {
       });
       setLoading(false);
 
-
-      if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='user') {
+      if (
+        response.data.token &&
+        response.data.user.detailsRegStatus === true &&
+        response.data.user.role === "user"
+      ) {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
         navigate("/userDashboard");
       }
-      
-      if(response.data.token&&response.data.user.detailsRegStatus===false&&response.data.user.role==='user'){
+
+      if (
+        response.data.token &&
+        response.data.user.detailsRegStatus === false &&
+        response.data.user.role === "user"
+      ) {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
-        navigate('/userDetailsRegister')
+        navigate("/userDetailsRegister");
       }
 
-      if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='veternarian') {
+      if (
+        response.data.token &&
+        response.data.user.detailsRegStatus === true &&
+        response.data.user.role === "veternarian"
+      ) {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
         navigate("/doctorDashboard");
       }
-      
-      if(response.data.token&&response.data.user.detailsRegStatus===false&&response.data.user.role==='veternarian'){
+
+      if (
+        response.data.token &&
+        response.data.user.detailsRegStatus === false &&
+        response.data.user.role === "veternarian"
+      ) {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
-        navigate('/vetDoctorDetailsRegister')
+        navigate("/vetDoctorDetailsRegister");
       }
 
-      if (response.data.token&&response.data.user.role==='approveAdmin') {
+      if (response.data.token && response.data.user.role === "approveAdmin") {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
         navigate("/approvePanel");
       }
-
     } catch (err) {
       setLoading(false);
       const serverError = err;
-      let customError=null;
+      console.log(err);
+      let customError = null;
       if (serverError.message === "Invalid Password") {
         customError = "Invalid password.";
       } else if (serverError.message === "User Not Found") {
         customError = "Invalid Email!";
-      } else{
-         customError = "Something went Wrong. Please try again.";
-       }
+      } else if (
+        serverError.message ===
+        "Your account has been deactivated or deleted. Please contact the administrator."
+      ) {
+        customError =
+          "Your Account is under verification. Please Contact Administrator!";
+      } else {
+        customError = "Something went Wrong. Please try again.";
+      }
 
       setErrors({
         ...validationErrors,
@@ -116,82 +137,91 @@ function LoginPage() {
           backgroundImage: `url(${Home})`,
         }}
       >
-     <section className="min-h-screen flex items-center justify-center bg-hero-pattern">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center">
-          <div className="w-full max-w-md bg-slate-200 p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-6">Login Now</h2>
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="mb-4">
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  name="email"
-                  value={inputs.email}
-                  onChange={handleInput}
-                  disabled={loading}
-                  error={!!errors.email.required}
-                  helperText={errors.email.required ? 'Email is required.' : ''}
-                />
-              </div>
-
-              <div className="mb-4">
-                <TextField
-                  label="Password"
-                  variant="outlined"
-                  fullWidth
-                  type="password"
-                  name="password"
-                  value={inputs.password}
-                  onChange={handleInput}
-                  disabled={loading}
-                  error={!!errors.password.required}
-                  helperText={errors.password.required ? 'Password is required.' : ''}
-                />
-                <div className="mt-2 text-right">
-                  <Link to="/forgotPassword" className="text-blue-500 text-sm">
-                    Forgot Password?
-                  </Link>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                {loading && (
-                  <div className="text-center my-4">
-                    <CircularProgress />
+        <section className="min-h-screen flex items-center justify-center bg-hero-pattern">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-center">
+              <div className="w-full max-w-md bg-slate-200 p-8 rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold text-center mb-6">
+                  Login Now
+                </h2>
+                <form onSubmit={handleSubmit} className="login-form">
+                  <div className="mb-4">
+                    <TextField
+                      label="Email"
+                      variant="outlined"
+                      fullWidth
+                      name="email"
+                      value={inputs.email}
+                      onChange={handleInput}
+                      disabled={loading}
+                      error={!!errors.email.required}
+                      helperText={
+                        errors.email.required ? "Email is required." : ""
+                      }
+                    />
                   </div>
-                )}
-                {errors.custom_error && (
-                  <div className="text-red-500 text-center">
-                    <p>{errors.custom_error}</p>
-                  </div>
-                )}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  disabled={loading}
-                  className="mt-4"
-                >
-                  Login
-                </Button>
-              </div>
 
-              <div className="text-center mt-4">
-                <p>
-                  Create a new account? Please{' '}
-                  <Link to="/register" className="text-blue-500">
-                    Register
-                  </Link>
-                </p>
+                  <div className="mb-4">
+                    <TextField
+                      label="Password"
+                      variant="outlined"
+                      fullWidth
+                      type="password"
+                      name="password"
+                      value={inputs.password}
+                      onChange={handleInput}
+                      disabled={loading}
+                      error={!!errors.password.required}
+                      helperText={
+                        errors.password.required ? "Password is required." : ""
+                      }
+                    />
+                    <div className="mt-2 text-right">
+                      <Link
+                        to="/forgotPassword"
+                        className="text-blue-500 text-sm"
+                      >
+                        Forgot Password?
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    {loading && (
+                      <div className="text-center my-4">
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {errors.custom_error && (
+                      <div className="text-red-500 text-center">
+                        <p>{errors.custom_error}</p>
+                      </div>
+                    )}
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      disabled={loading}
+                      className="mt-4"
+                    >
+                      Login
+                    </Button>
+                  </div>
+
+                  <div className="text-center mt-4">
+                    <p>
+                      Create a new account? Please{" "}
+                      <Link to="/register" className="text-blue-500">
+                        Register
+                      </Link>
+                    </p>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
       </div>
 
       <Footer />
