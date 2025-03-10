@@ -6,7 +6,7 @@ import NavBar from "./NavBar";
 import Home from "../assets/Home.webp";
 import { Link } from "react-router-dom";
 import { AnimatedName } from "./AnimatedName";
-import { autoLogin, getRole } from "../services/api";
+import { autoLogin, getUserState } from "../services/api";
 import { useState } from "react";
 import Loader from "./Loader";
 
@@ -21,16 +21,21 @@ function HomePage() {
       try {
         setLoading(true);
         const response = await autoLogin(token);
-        const userRole = await getRole(response.data.user.id);
-        const Role = userRole.data.userRole.role;
+        const userState = await getUserState(response.data.user.id);
+        const Role = userState.data.userState.role;
+        const isActivate = userState.data.userState.activate;
         setLoading(false);
 
-        if (Role === "veternarian") {
-          navigate("/doctorDashboard");
-        } else if (Role === "user") {
-          navigate("/userDashboard");
-        }else if(Role==='approveAdmin'){
-          navigate('/approvePanel')
+        if (isActivate) {
+          if (Role === "veternarian") {
+            navigate("/doctorDashboard");
+          } else if (Role === "user") {
+            navigate("/userDashboard");
+          } else if (Role === "approveAdmin") {
+            navigate("/approvePanel");
+          }
+        } else {
+          navigate('/404Error');
         }
       } catch (error) {
         console.error("Auto-login failed:", error);
@@ -43,8 +48,8 @@ function HomePage() {
     }
   }, [navigate]);
 
-  if(loading){
-    return <Loader/>
+  if (loading) {
+    return <Loader />;
   }
 
   return (
@@ -91,8 +96,6 @@ function HomePage() {
         </div>
       </div>
     </>
-   
   );
-
 }
 export default HomePage;
