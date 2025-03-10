@@ -87,24 +87,8 @@ const NAVIGATION = [
     segment: "analytics",
     title: "Analytics",
     icon: <BarChartIcon />,
-    // children: [
-    //   {
-    //     segment: "sales",
-    //     title: "Sales",
-    //     icon: <DescriptionIcon />,
-    //   },
-    //   {
-    //     segment: "traffic",
-    //     title: "Traffic",
-    //     icon: <DescriptionIcon />,
-    //   },
-    // ],
+
   },
-  // {
-  //   segment: "integrations",
-  //   title: "Integrations",
-  //   icon: <LayersIcon />,
-  // },
   {
     kind: "divider",
   },
@@ -136,21 +120,6 @@ const NAVIGATION = [
   },
 ];
 
-// const demoTheme = createTheme({
-//   cssVariables: {
-//     colorSchemeSelector: "data-toolpad-color-scheme",
-//   },
-//   colorSchemes: { light: true, dark: true },
-//   breakpoints: {
-//     values: {
-//       xs: 0,
-//       sm: 600,
-//       md: 600,
-//       lg: 1200,
-//       xl: 1536,
-//     },
-//   },
-// });
 
 function DemoPageContent({ pathname, router }) {
   const [isOpenSuggestionForm, setOpenSuggestionForm] = useState(false);
@@ -171,7 +140,7 @@ function DemoPageContent({ pathname, router }) {
         textAlign: "center",
       }}
     >
-      {/* <Typography>{pathname}</Typography> */}
+      <Typography>{pathname}</Typography>
 
       {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
 
@@ -200,7 +169,7 @@ function DemoPageContent({ pathname, router }) {
         </>
       )}
 
-      {(pathname === "/diseaseAnimalRecord" ||
+      {(pathname === "/diseasedAnimalsRecord" ||
         pathname === "/diseasedAnimalsRecord/patientsList") && (
         <>
           {isOpenSuggestionForm ? (
@@ -249,19 +218,20 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/analytics" && <ComingSoon />}
 
-      {pathname === "/account/viewAccount" && (
-        <>
-          <Typography
-            variant="h4"
-            color="primary"
-            style={{ fontWeight: "bold" }}
-          >
-            User information
-          </Typography>
-          <br />
-          <DoctorAccountOverview />
-        </>
-      )}
+      {pathname === "/account/viewAccount" ||
+        (pathname === "/account" && (
+          <>
+            <Typography
+              variant="h4"
+              color="primary"
+              style={{ fontWeight: "bold" }}
+            >
+              User information
+            </Typography>
+            <br />
+            <DoctorAccountOverview />
+          </>
+        ))}
 
       {pathname === "/account/updateAccount" && (
         <>
@@ -318,7 +288,6 @@ function DashboardLayoutBasic(props) {
       <AppProvider
         navigation={NAVIGATION}
         router={router}
-        // theme={demoTheme}
         window={demoWindow}
         branding={{
           logo: <Logo />,
