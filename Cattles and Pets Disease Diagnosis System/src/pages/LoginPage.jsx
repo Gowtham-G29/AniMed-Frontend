@@ -108,8 +108,6 @@ function LoginPage() {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
 
-  
-
   return (
     <div>
       <NavBar2 />

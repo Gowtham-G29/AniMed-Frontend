@@ -92,24 +92,38 @@ function Register() {
         navigate("/userDetailsRegister");
       }
 
-      try{
-        if (response.data.token && response.data.newUser.role === "approveAdmin") {
+      try {
+        if (
+          response.data.token &&
+          response.data.newUser.role === "approveAdmin"
+        ) {
           setLoading(true);
           accountDeactivate();
           setLoading(false);
           navigate("/404Error");
         }
-      }catch(error){
-        console.log(error);
+      } catch (error) {
+        throw new Error(error.response.data.message);
       }
-     
-
     } catch (err) {
       setLoading(false);
-      console.log(err);
+
+      const serverError = err;
+      let customError = null;
+      if (serverError.message === "User Already Registered") {
+        customError = "User Already Registered ! Try with another mail ID.";
+      } else {
+        customError = "Something went Wrong. Please try again.";
+      }
+
+      setErrors({
+        ...validationErrors,
+        custom_error: customError,
+      });
     }
   };
 
+  
   const handleInput = (event) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
@@ -184,7 +198,6 @@ function Register() {
                       <option value="user">User</option>
                       <option value="veternarian">Veternarian</option>
                       <option value="approveAdmin">Admin</option>
-
                     </TextField>
                   </div>
 
