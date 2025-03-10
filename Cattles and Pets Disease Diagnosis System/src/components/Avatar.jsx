@@ -3,7 +3,7 @@ function Avatar() {
       <div className="w-8 h-8 rounded-full m-0 p-0 overflow-hidden">
         <img
           alt="Avatar"
-          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+          src="https://i.pinimg.com/474x/41/b5/fd/41b5fdeb11298a62c49a7af6dd000d75.jpg"
           className="w-full h-full object-cover"
         />
       </div>

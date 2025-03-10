@@ -100,19 +100,21 @@ const DemoPageContent = ({ pathname, router }) => {
         textAlign: "center",
       }}
     >
-      {pathname === "/MedicalHelp/contactDoctors" && (
-        <>
-          <Typography
-            variant="h4"
-            color="primary"
-            marginBottom="50px"
-            style={{ fontWeight: "bold" }}
-          >
-            Nearby Doctors Contacts
-          </Typography>
-          <DoctorContacts />
-        </>
-      )}
+      <Typography>{pathname}</Typography>
+      {pathname === "/MedicalHelp/contactDoctors" ||
+        (pathname === "/MedicalHelp" && (
+          <>
+            <Typography
+              variant="h4"
+              color="primary"
+              marginBottom="50px"
+              style={{ fontWeight: "bold" }}
+            >
+              Nearby Doctors Contacts
+            </Typography>
+            <DoctorContacts />
+          </>
+        ))}
 
       {pathname === "/MedicalHelp/nearbyLocations" && (
         <>
@@ -134,19 +136,20 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/YourAnimals/ViewLogs" && (
-        <>
-          <Typography
-            variant="h4"
-            color="primary"
-            marginBottom="50px"
-            style={{ fontWeight: "bold" }}
-          >
-            Registered Logs
-          </Typography>
-          <AnimalDataTable />
-        </>
-      )}
+      {pathname === "/YourAnimals/ViewLogs" ||
+        (pathname === "/YourAnimals" && (
+          <>
+            <Typography
+              variant="h4"
+              color="primary"
+              marginBottom="50px"
+              style={{ fontWeight: "bold" }}
+            >
+              Registered Logs
+            </Typography>
+            <AnimalDataTable />
+          </>
+        ))}
 
       {pathname === "/Account/updateAccount" && (
         <>
@@ -175,7 +178,7 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/Account/viewProfile" && (
+      {(pathname === "/Account/viewProfile")||(pathname==="/Account") && (
         <>
           <Typography
             variant="h4"
@@ -258,7 +261,7 @@ const DemoPageContent = ({ pathname, router }) => {
 
       {pathname === "/Detectiondevice/doctorsuggestions" && <ComingSoon />}
 
-      {pathname === "/Detectiondevice/PredictionLogs" && <ComingSoon />}
+      {(pathname === "/Detectiondevice/PredictionLogs")||(pathname==="/Detectiondevice") && <ComingSoon />}
 
       {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />}
 
