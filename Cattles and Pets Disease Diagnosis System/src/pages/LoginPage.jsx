@@ -54,6 +54,7 @@ function LoginPage() {
       });
       setLoading(false);
 
+
       if (response.data.token&&response.data.user.detailsRegStatus===true&&response.data.user.role==='user') {
         localStorage.clear();
         localStorage.setItem("jwt", response.data.token);
@@ -84,21 +85,17 @@ function LoginPage() {
         navigate("/approvePanel");
       }
 
-  
-
     } catch (err) {
       setLoading(false);
-      console.log(err);
-      const serverError = err.response?.data?.message || "An unexpected error occurred.";
-      let customError = null;
-
-      if (serverError === "Invalid password") {
+      const serverError = err;
+      let customError=null;
+      if (serverError.message === "Invalid Password") {
         customError = "Invalid password.";
-      } else if (serverError === "User Not Found") {
-        customError = "Invalid Email! User Not Found.";
-      } else {
-        customError = "An error occurred. Please try again.";
-      }
+      } else if (serverError.message === "User Not Found") {
+        customError = "Invalid Email!";
+      } else{
+         customError = "Something went Wrong. Please try again.";
+       }
 
       setErrors({
         ...validationErrors,
