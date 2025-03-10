@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { getDiseaseInfo } from "../services/api";
-import chatBotImage from "../assets/chatBot-Image.png"; // Adjust the path based on your project structure
-
+import chatBotImage from "../assets/chatBot-Image.png";
 
 function DiseaseInfoChatBotPage({ diseaseName }) {
   const [messages, setMessages] = useState([]);
@@ -21,41 +20,73 @@ function DiseaseInfoChatBotPage({ diseaseName }) {
           const newMessage = {
             sender: "AniMed",
             time: new Date().toLocaleTimeString(),
-            text: `
-                Disease Overview
-                --------------------
-                Name: ${response.data.diseaseInfo.diseaseName}
-                Scientific Name: ${response.data.diseaseInfo.scientificName || "N/A"}
-        
-                Key Information
-                --------------------
-                Species Affected: ${response.data.diseaseInfo.speciesAffected || "N/A"}
-                Zoonotic Potential: ${response.data.diseaseInfo.zoonoticPotential}
-                Caused By: ${response.data.diseaseInfo.causativeAgent || "N/A"}
-                Approximate Duration: ${response.data.diseaseInfo.duration || "N/A"}
-        
-                Clinical Presentation
-                --------------------------
-                Symptoms: ${response.data.diseaseInfo.symptoms || "N/A"}
-                Behavioral Changes: ${response.data.diseaseInfo.behaviourChanges || "N/A"}
-        
-                Transmission & Diagnosis
-                -----------------------------
-                Mode of Transmission: ${response.data.diseaseInfo.transmission || "N/A"}
-                Diagnosis Methods: ${response.data.diseaseInfo.diagnosisMethods || "N/A"}
-        
-                Treatment & Management
-                ---------------------------
-                Medications: ${response.data.diseaseInfo.medications || "N/A"}
-                First Aid Measures: ${response.data.diseaseInfo.firstAid || "N/A"}
-                Monitoring Guidelines: ${response.data.diseaseInfo.monitoring || "N/A"}
-        
-                Prevention & Risk Factors
-                ------------------------------
-                Prevention Strategies: ${response.data.diseaseInfo.preventionStrategies || "N/A"}
-                Pre-Disposing Factors: ${response.data.diseaseInfo.predisposingFactors || "N/A"}
-            `.trim(),
+            text: (
+              <div className="font-sans max-w-lg bg-slate-300  p-6 rounded-xl ">
+                <h2 className="text-xl font-bold text-gray-800">🩺 Disease Overview</h2>
+                <hr className="border-gray-600 my-3" />
+          
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700">Name:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.diseaseName}</span>
+                  <span className="font-semibold text-gray-700">Scientific Name:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.scientificName || "N/A"}</span>
+                </div>
+          
+                <h2 className="text-lg font-bold text-gray-800 mt-5">📖 Key Information</h2>
+                <hr className="border-gray-600 my-3" />
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700"> Species Affected:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.speciesAffected || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Spreadable:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.zoonoticPotential}</span>
+                  <span className="font-semibold text-gray-700">Caused By:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.causativeAgent || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Duration:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.duration || "N/A"}</span>
+                </div>
+          
+                <h2 className="text-lg font-bold text-gray-800 mt-5">🩹 Clinical Presentation</h2>
+                <hr className="border-gray-600 my-3" />
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700">Symptoms:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.symptoms || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Behavioral Changes:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.behaviorChanges || "N/A"}</span>
+                </div>
+          
+                <h2 className="text-lg font-bold text-gray-800 mt-5">🧪 Transmission & Diagnosis</h2>
+                <hr className="border-gray-600 my-3" />
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700">Transmission:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.transmission || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Diagnosis Methods:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.diagnosisMethods || "N/A"}</span>
+                </div>
+          
+                <h2 className="text-lg font-bold text-gray-800 mt-5">💊 Treatment & Management</h2>
+                <hr className="border-gray-600 my-3" />
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700">Medications:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.medications || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">First Aid:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.firstAid || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Monitoring:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.monitoring || "N/A"}</span>
+                </div>
+          
+                <h2 className="text-lg font-bold text-gray-800 mt-5">🛡️ Prevention & Risk Factors</h2>
+                <hr className="border-gray-300 my-2" />
+                <div className="grid grid-cols-2 gap-2">
+                  <span className="font-semibold text-gray-700">Prevention:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.preventionStrategies || "N/A"}</span>
+                  <span className="font-semibold text-gray-700">Risk Factors:</span>
+                  <span className="text-gray-900">{response.data.diseaseInfo.predisposingFactors || "N/A"}</span>
+                </div>
+              </div>
+            ),
           };
+          
+          
 
           setMessages((prevMessages) => [...prevMessages, newMessage]);
         } catch (error) {
@@ -86,18 +117,15 @@ function DiseaseInfoChatBotPage({ diseaseName }) {
 
   return (
     <div
-    className="w-full max-w-screen-lg mx-auto p-4 pb-20 min-h-screen"
-    style={{
-      backgroundImage: `url(${chatBotImage})`,
-      backgroundSize: "50% 70%", // Adjusts both width and height
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      backgroundAttachment: "fixed",
-      
-    }}
-    
-    
-  >
+      className="w-full max-w-screen-lg mx-auto p-4 pb-20 min-h-screen"
+      style={{
+        backgroundImage: `url(${chatBotImage})`,
+        backgroundSize: "50% 70%", // Adjusts both width and height
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {messages.map((message, index) => (
         <div
           key={index}
@@ -121,7 +149,7 @@ function DiseaseInfoChatBotPage({ diseaseName }) {
             <time className="text-xs "> {message.time}</time>
           </div>
 
-          <div className="chat-bubble whitespace-pre-line bg-slate-600 text-slate-300">
+          <div className="chat-bubble whitespace-pre-line bg-slate-300 text-slate-900">
             {message.text}
           </div>
 
