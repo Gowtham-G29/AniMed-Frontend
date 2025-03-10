@@ -1,5 +1,4 @@
 import PetsIcon from "@mui/icons-material/Pets";
-// import LoginButton from "./LoginButton";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -22,7 +21,6 @@ function NavBar2() {
         </div>{" "}
       </div>
       <div className="navbar-end ">
-        {/* <LoginButton /> */}
       </div>
     </div>
   );
