@@ -9,11 +9,14 @@ export const login = async (inputs) => {
     const response = await axios.post(`${BASE_URL}/api/v1/users/login`, inputs, {
       withCredentials: true
     });
+
     return response;
 
   } catch (error) {
-    console.log(error);
-    throw new Error(error.response?.data?.message || 'login failed');
+
+    throw new Error(error.response.data.message);
+
+    // return error;
   }
 }
 
@@ -37,7 +40,7 @@ export const signup = async (inputs) => {
     return response;
 
   } catch (err) {
-    throw new Error(err.response?.data?.message || 'Signup failed');
+    throw new Error(err.response.data.message || 'Signup failed');
   }
 };
 
@@ -437,7 +440,7 @@ export const getDiseaseInfo = async (disease) => {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/diseaseInformation/getDiseaseInfo`, {
       params: {
-        diseaseName:disease
+        diseaseName: disease
       }
     })
     return response;
@@ -451,8 +454,17 @@ export const getDiseaseInfo = async (disease) => {
   }
 }
 
-getDiseaseInfo('Anthrax');
+export const getUserDetails = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getMe`, {
+      withCredentials: true
+    });
+    return response;
 
+  } catch (error) {
+    return error;
+  }
+}
 
 
 
