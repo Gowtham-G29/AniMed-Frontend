@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+// import { Typography } from "@mui/material";
 
 /* eslint-disable react/prop-types */
 function LocationSelectionModeConfirmationModal({ handleLocationChoice }) {
@@ -11,10 +11,10 @@ function LocationSelectionModeConfirmationModal({ handleLocationChoice }) {
         <h3 className="font-bold text-xl text-gray-800 mb-2" >
           Location Selection Option
         </h3>
-        <Typography variant="subtitle3" className="text-slate-500">
+        {/* <Typography variant="subtitle3" className="text-slate-500">
           <strong className="text-black font-bold">Note*:</strong>This location
           Points your diseased animal.
-        </Typography>
+        </Typography> */}
         <p className="py-4 text-gray-600 text-center">
           Press{" "}
           <span className="font-semibold text-green-600">&quot;Yes&quot;</span>{" "}
