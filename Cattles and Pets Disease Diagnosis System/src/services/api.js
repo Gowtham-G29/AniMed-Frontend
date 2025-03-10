@@ -381,9 +381,9 @@ export const autoLogin = async (token) => {
   }
 }
 
-export const getRole = async (userID) => {
+export const getUserState = async (userID) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/v1/users/getRole`, {
+    const response = await axios.get(`${BASE_URL}/api/v1/users/getUserState`, {
       params: { _id: userID }
     });
 
