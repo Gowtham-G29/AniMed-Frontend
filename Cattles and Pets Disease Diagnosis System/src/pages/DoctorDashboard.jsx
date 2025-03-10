@@ -140,7 +140,7 @@ function DemoPageContent({ pathname, router }) {
         textAlign: "center",
       }}
     >
-      <Typography>{pathname}</Typography>
+      {/* <Typography>{pathname}</Typography> */}
 
       {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
 
