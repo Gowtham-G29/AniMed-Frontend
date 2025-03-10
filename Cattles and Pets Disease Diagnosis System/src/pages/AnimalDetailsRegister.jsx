@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-import { Stepper, Step, StepLabel, Button, TextField } from "@mui/material";
+import { Stepper, Step, StepLabel, Button, TextField, Typography } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { animalDetailsRegister } from "../services/api";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -202,6 +202,7 @@ function AnimalDetailsRegister({
     "Medical History",
     "Current Complaints",
     "Other Details",
+    "Animal Current Location"
   ];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -374,6 +375,11 @@ function AnimalDetailsRegister({
               </Stepper>
 
               <div className="mt-8">
+
+              {activeStep===4&&(
+                <Typography variant="subtitle3" className="text-slate-500 font-bold">Click &quot;Submit&quot;to choose location and submit details.</Typography>
+              )}
+
                 {activeStep === 0 && (
                   <div>
                     <TextField
