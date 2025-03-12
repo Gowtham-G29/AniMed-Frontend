@@ -19,8 +19,8 @@ import AnimalDataTable2 from "../components/DataTableAnimals2";
 import DoctorDashboardHomePage from "../components/DoctorDashboardHomepage";
 import { useEffect, useState } from "react";
 import SuggestionForm from "../components/SuggestionForm";
-import SpeakerPhoneIcon from "@mui/icons-material/SpeakerPhone";
-import InfoIcon from "@mui/icons-material/Info";
+// import SpeakerPhoneIcon from "@mui/icons-material/SpeakerPhone";
+// import InfoIcon from "@mui/icons-material/Info";
 import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
@@ -54,23 +54,23 @@ const NAVIGATION = [
       },
     ],
   },
-  {
-    segment: "detectiondevice",
-    title: "Detection Device",
-    icon: <SpeakerPhoneIcon />,
-    children: [
-      {
-        segment: "detectionDeviceList",
-        title: "Detection Device reports",
-        icon: <DescriptionIcon />,
-      },
-      {
-        segment: "deviceOwnersinfo",
-        title: "Device Users Info",
-        icon: <InfoIcon />,
-      },
-    ],
-  },
+  // {
+  //   segment: "detectiondevice",
+  //   title: "Detection Device",
+  //   icon: <SpeakerPhoneIcon />,
+  //   children: [
+  //     {
+  //       segment: "detectionDeviceList",
+  //       title: "Detection Device reports",
+  //       icon: <DescriptionIcon />,
+  //     },
+  //     {
+  //       segment: "deviceOwnersinfo",
+  //       title: "Device Users Info",
+  //       icon: <InfoIcon />,
+  //     },
+  //   ],
+  // },
   {
     segment: "updateAboutDiseases",
     title: "Update About Diseases",
@@ -207,10 +207,10 @@ function DemoPageContent({ pathname, router }) {
         </>
       )}
 
-      {(pathname === "/detectiondevice" ||
+      {/* {(pathname === "/detectiondevice" ||
         pathname === "/detectiondevice/detectionDeviceList") && <ComingSoon />}
 
-      {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />}
+      {pathname === "/detectiondevice/deviceOwnersinfo" && <ComingSoon />} */}
 
       {pathname === "/updateAboutDiseases" && (
         <DiseaseDetailsUpdateForm handleNavigate={handleNavigate} />

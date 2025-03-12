@@ -40,17 +40,18 @@ import LogoutImage from "../components/LogoutImage";
 import UpdateProfile from "./UpdateProfile";
 import AnimalDataTable from "../components/DataTableAnimal";
 import SuggestionList from "../components/SuggestionList";
-import SettingsRemoteIcon from "@mui/icons-material/SettingsRemote";
-import InfoIcon from "@mui/icons-material/Info";
-import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+// import SettingsRemoteIcon from "@mui/icons-material/SettingsRemote";
+// import InfoIcon from "@mui/icons-material/Info";
+// import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
 import { UserMap } from "./UserMap";
 import DoctorContacts from "../components/DoctorContacts";
-import ComingSoon from "../components/ComingSoon";
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-import DiseaseImageUpload from "../components/DiseasePrediction";
+// import ComingSoon from "../components/ComingSoon";
+// import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import DiseaseInfoChatPage from "../components/DiseaseInfoChatBotPage";
 import DiseaseInfoChatBotSearchBar from "../components/DiseaseInfoChatBotSearchBar";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
+import DiseasePrediction from "../components/DiseasePrediction";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -101,20 +102,20 @@ const DemoPageContent = ({ pathname, router }) => {
       }}
     >
       {/* <Typography>{pathname}</Typography> */}
-      {pathname === "/MedicalHelp/contactDoctors" ||
-        (pathname === "/MedicalHelp" && (
-          <>
-            <Typography
-              variant="h4"
-              color="primary"
-              marginBottom="50px"
-              style={{ fontWeight: "bold" }}
-            >
-              Nearby Doctors Contacts
-            </Typography>
-            <DoctorContacts />
-          </>
-        ))}
+      {(pathname === "/MedicalHelp/contactDoctors" ||
+        pathname === "/MedicalHelp") && (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
+            Nearby Doctors Contacts
+          </Typography>
+          <DoctorContacts />
+        </>
+      )}
 
       {pathname === "/MedicalHelp/nearbyLocations" && (
         <>
@@ -178,19 +179,20 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {(pathname === "/Account/viewProfile")||(pathname==="/Account") && (
-        <>
-          <Typography
-            variant="h4"
-            color="primary"
-            marginBottom="50px"
-            style={{ fontWeight: "bold" }}
-          >
-            User Info
-          </Typography>
-          <UserAccountOverview />
-        </>
-      )}
+      {pathname === "/Account/viewProfile" ||
+        (pathname === "/Account" && (
+          <>
+            <Typography
+              variant="h4"
+              color="primary"
+              marginBottom="50px"
+              style={{ fontWeight: "bold" }}
+            >
+              User Info
+            </Typography>
+            <UserAccountOverview />
+          </>
+        ))}
 
       {pathname === "/Home" && (
         <>
@@ -237,7 +239,8 @@ const DemoPageContent = ({ pathname, router }) => {
                   <Typography
                     variant="h4"
                     color="primary"
-                    marginBottom="50px"
+                    marginBottom="60px"
+                    marginTop="20px"
                     style={{ fontWeight: "bold" }}
                   >
                     Choose Animal Type
@@ -258,14 +261,26 @@ const DemoPageContent = ({ pathname, router }) => {
           </div>
         </>
       )}
-
+      {/* 
       {pathname === "/Detectiondevice/doctorsuggestions" && <ComingSoon />}
 
-      {(pathname === "/Detectiondevice/PredictionLogs")||(pathname==="/Detectiondevice") && <ComingSoon />}
+      {pathname === "/Detectiondevice/PredictionLogs" ||
+        (pathname === "/Detectiondevice" && <ComingSoon />)}
 
-      {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />}
+      {pathname === "/Detectiondevice/yourDeviceInfo" && <ComingSoon />} */}
 
-      {pathname === "/prediction" && <DiseaseImageUpload />}
+      {pathname === "/prediction" && (
+        <div className="flex flex-col gap-10">
+          <Typography
+            variant="h5"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            Skin Disease Prediction
+          </Typography>
+          <DiseasePrediction />
+        </div>
+      )}
     </Box>
   );
 };
@@ -313,23 +328,23 @@ const MEDICALHELP_NAVIGATION = [
   },
 ];
 
-const DETECTION_DEVICE = [
-  {
-    segment: "PredictionLogs",
-    title: "Prediction Logs",
-    icon: <FormatListNumberedRtlIcon />,
-  },
-  {
-    segment: "doctorsuggestions",
-    title: "Doctor suggestions",
-    icon: <MedicationIcon />,
-  },
-  {
-    segment: "yourDeviceInfo",
-    title: "Your Device Info",
-    icon: <InfoIcon />,
-  },
-];
+// const DETECTION_DEVICE = [
+//   {
+//     segment: "PredictionLogs",
+//     title: "Prediction Logs",
+//     icon: <FormatListNumberedRtlIcon />,
+//   },
+//   {
+//     segment: "doctorsuggestions",
+//     title: "Doctor suggestions",
+//     icon: <MedicationIcon />,
+//   },
+//   {
+//     segment: "yourDeviceInfo",
+//     title: "Your Device Info",
+//     icon: <InfoIcon />,
+//   },
+// ];
 
 function DashboardLayoutNavigationActions() {
   const navigate = useNavigate();
@@ -372,16 +387,16 @@ function DashboardLayoutNavigationActions() {
           title: "Know About Disease (Chat bot)",
           icon: <SmartToyIcon />,
         },
-        {
-          segment: "Detectiondevice",
-          title: "Detection Device",
-          icon: <SettingsRemoteIcon />,
-          children: DETECTION_DEVICE,
-        },
+        // {
+        //   segment: "Detectiondevice",
+        //   title: "Detection Device",
+        //   icon: <SettingsRemoteIcon />,
+        //   children: DETECTION_DEVICE,
+        // },
         {
           segment: "prediction",
-          title: "Disease Prediction",
-          icon: <TipsAndUpdatesIcon />,
+          title: "Skin Disease Prediction",
+          icon: <AutoAwesomeIcon />,
         },
         {
           kind: "divider",

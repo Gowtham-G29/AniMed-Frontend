@@ -536,6 +536,9 @@ function VetDoctorDetailsRegister() {
       }
     } catch (error) {
       setLoading(false);
+      if(error){
+        navigate('/404Error')
+      }
       return error;
     }
   };

@@ -18,9 +18,9 @@ export default function AnimalTypeSelect({ animalType }) {
         },
       }}
     >
-      <div className="w-full pt-0 p-28  overflow-y-hidden  ">
-        <div className="flex flex-col items-center  ">
-          <div className="flex flex-col md:flex-row justify-center items-center h-screen space-y-4 md:space-y-0 md:space-x-4 ">
+      <div className="w-full overflow-hidden">
+        <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4  p-4">
             <Box
               sx={{
                 width: 300,

@@ -377,7 +377,7 @@ function AnimalDetailsRegister({
               <div className="mt-8">
 
               {activeStep===4&&(
-                <Typography variant="subtitle3" className="text-slate-500 font-bold">Click &quot;Submit&quot;to choose location and submit details.</Typography>
+                <Typography variant="subtitle3" className="text-slate-500 font-bold">Click &quot;Submit&quot;to choose location and submit details. Kindly ensure all the neccessary details to be filled before submitting.</Typography>
               )}
 
                 {activeStep === 0 && (

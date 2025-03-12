@@ -53,15 +53,15 @@ function UserDashboardHomePage({ setregPageNavigate }) {
         <div className="max-w-md">
           <div className="flex mb-5 px-3 text-5xl font-bold">
             <AnimatedName
-              text={`Hello`}
-              className="custom-class mr-3"
+              text={`Welcome !`}
+              className="custom-class "
               delay={50}
             />{" "}
-            <AnimatedName
+            {/* <AnimatedName
               text={`${userName} !`}
               className="custom-class"
               delay={50}
-            />
+            /> */}
           </div>
 
           <button className="btn bg-blue-400" onClick={handleNavigateRegPage}>

@@ -8,8 +8,8 @@ function LocationSelectionModeConfirmationModal({ handleLocationChoice }) {
       className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
     >
       <div className="modal-box bg-white p-6 rounded-lg shadow-lg max-w-md">
-        <h3 className="font-bold text-xl text-gray-800 mb-2" >
-          Location Selection Option
+        <h3 className="font-bold text-xl text-gray-800 mb-2 mx-28" >
+          Select Location !
         </h3>
         {/* <Typography variant="subtitle3" className="text-slate-500">
           <strong className="text-black font-bold">Note*:</strong>This location
