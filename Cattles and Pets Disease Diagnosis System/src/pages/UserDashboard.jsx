@@ -137,20 +137,19 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/YourAnimals/ViewLogs" ||
-        (pathname === "/YourAnimals" && (
-          <>
-            <Typography
-              variant="h4"
-              color="primary"
-              marginBottom="50px"
-              style={{ fontWeight: "bold" }}
-            >
-              Registered Logs
-            </Typography>
-            <AnimalDataTable />
-          </>
-        ))}
+      {pathname === "/YourAnimals/ViewLogs" || pathname === "/YourAnimals" ? (
+        <>
+          <Typography
+            variant="h4"
+            color="primary"
+            marginBottom="50px"
+            style={{ fontWeight: "bold" }}
+          >
+            Registered Logs
+          </Typography>
+          <AnimalDataTable />
+        </>
+      ) : null}
 
       {pathname === "/Account/updateAccount" && (
         <>
