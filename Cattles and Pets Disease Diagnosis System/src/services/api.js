@@ -467,6 +467,23 @@ export const getUserDetails = async () => {
 }
 
 
+export const getPrediction = async (formData) => {
+  try {
+    const response = await axios.post("http://127.0.0.1:8000/predict", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    return response;
+
+
+  } catch (error) {
+
+    throw new Error(error.response.message);
+
+  }
+}
+
+
 
 
 
