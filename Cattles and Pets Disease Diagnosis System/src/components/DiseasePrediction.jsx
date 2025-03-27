@@ -12,6 +12,7 @@ import { CloudUpload, CameraAlt } from "@mui/icons-material";
 import CameraIcon from "@mui/icons-material/Camera";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import PredictionResultModal from "./PredictionResultBox";
+import LoaderMini from "./LoaderMini";
 
 const ImageUploader = () => {
   const [image, setImage] = useState(null);
@@ -37,16 +38,27 @@ const ImageUploader = () => {
   // Handle camera capture
   const startCamera = () => {
     setOpen(true);
-
+  
     navigator.mediaDevices
-      .getUserMedia({ video: true })
+      .getUserMedia({ video: { facingMode: { exact: "environment" } } })
       .then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
       })
-      .catch((error) => console.error("Camera access error:", error));
+      .catch((error) => {
+        console.error("Camera access error:", error);
+        navigator.mediaDevices
+          .getUserMedia({ video: true }) // Fallback in case of error
+          .then((stream) => {
+            if (videoRef.current) {
+              videoRef.current.srcObject = stream;
+            }
+          })
+          .catch((err) => console.error("Fallback camera access error:", err));
+      });
   };
+  
 
   const captureImage = () => {
     if (videoRef.current && canvasRef.current) {
@@ -171,15 +183,19 @@ const ImageUploader = () => {
               className="mt-4"
             />
           )}
+          {loading ? (
+            <LoaderMini />
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AutoAwesomeIcon />}
+              onClick={handleUpload}
+            >
+              Upload & Predict
+            </Button>
+          )}
 
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AutoAwesomeIcon />}
-            onClick={handleUpload}
-          >
-            Upload & Predict
-          </Button>
           {prediction && (
             <PredictionResultModal
               prediction={prediction}

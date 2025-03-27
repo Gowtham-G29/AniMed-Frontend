@@ -6,6 +6,8 @@ import L from "leaflet";
 import Loader from "../components/Loader";
 import FloatingNavigationButton from "../components/FloatingNavigationButton";
 import { getAnimalOwnerDetails, getNearByDoctors } from "../services/api";
+import doctorMarker from "../assets/doctor-marker.png";
+import currentLocationMarker from "../assets/currentLocation.png";
 
 const CenterMap = ({ currentLocation }) => {
   const map = useMap();
@@ -72,13 +74,13 @@ export const UserMap = () => {
   }, [navigateCurrent]);
 
   const customIcon1 = new L.Icon({
-    iconUrl: "/src/assets/doctor-marker.png",
+    iconUrl: doctorMarker,
     iconSize: [30, 50],
     iconAnchor: [15, 50],
   });
 
   const customIcon2 = new L.Icon({
-    iconUrl: "/src/assets/currentlocation.png",
+    iconUrl: currentLocationMarker,
     iconSize: [40, 60],
     iconAnchor: [15, 50],
   });

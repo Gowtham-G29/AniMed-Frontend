@@ -1,22 +1,39 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { VitePWA } from "vite-plugin-pwa";
+
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), 
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'AniMed',
+        short_name: 'AniMed',
+        icons: [
+          {
+            src: '/icons/icon192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/icons/icon512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ],
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#007bff'
+      }
+    })],
   server: {
     host: true, // Enables access via the local network
   },
-  optimizeDeps: {
-    include: ['@tensorflow/tfjs-tflite'],
-  },
-  resolve: {
-    alias: {
-      './tflite_web_api_client': path.resolve(
-        __dirname,
-        'node_modules/@tensorflow/tfjs-tflite/dist/tflite_web_api_client.js'
-      ),
-    },
-  },
+  publicDir: 'public',  // Ensure public folder is used
+
+ 
+
 });

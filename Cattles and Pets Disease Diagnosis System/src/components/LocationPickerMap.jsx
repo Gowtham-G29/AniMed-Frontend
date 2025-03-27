@@ -17,17 +17,19 @@ import {
   Button,
 } from "@mui/material";
 import LoaderMini from "./LoaderMini";
+import pinLocation from "../assets/pin2.png";
+import currentLocationMarker from "../assets/currentLocation2.png";
 
 // Custom icon for clicked location
 const clickedLocationIcon = new L.Icon({
-  iconUrl: "src/assets/pin2.png",
+  iconUrl: pinLocation,
   iconSize: [50, 50],
   iconAnchor: [13, 50],
 });
 
 // Custom icon for current location
 const currentLocationIcon = new L.Icon({
-  iconUrl: "src/assets/currentLocation2.png",
+  iconUrl: currentLocationMarker,
   iconSize: [30, 50],
   iconAnchor: [17, 50],
 });
@@ -75,7 +77,7 @@ const LocationPickerMap = ({ setManualCoords }) => {
   };
 
   if (!currentPosition) {
-    return <LoaderMini/>;
+    return <LoaderMini />;
   }
 
   console.log("final", finalLocation);
