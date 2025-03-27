@@ -6,6 +6,8 @@ import L from "leaflet";
 import Loader from "../components/Loader";
 import FloatingNavigationButton from "../components/FloatingNavigationButton";
 import { approveDoctors } from "../services/api";
+import currentLocationMarker from "../assets/currentlocation.png"
+import doctorlocation from "../assets/doctor-marker.png"
 
 const CenterMap = ({ currentLocation }) => {
   const map = useMap();
@@ -70,13 +72,13 @@ export const ApproverMap = () => {
   }, [navigateCurrent]);
 
   const customIcon1 = new L.Icon({
-    iconUrl: "/src/assets/doctor-marker.png",
+    iconUrl: doctorlocation,
     iconSize: [30, 50],
     iconAnchor: [15, 50],
   });
 
   const customIcon2 = new L.Icon({
-    iconUrl: "/src/assets/currentlocation.png",
+    iconUrl: currentLocationMarker,
     iconSize: [40, 60],
     iconAnchor: [15, 50],
   });
