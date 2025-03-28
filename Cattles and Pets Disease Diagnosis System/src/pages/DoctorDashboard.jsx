@@ -140,7 +140,7 @@ function DemoPageContent({ pathname, router }) {
         textAlign: "center",
       }}
     >
-      {/* <Typography>{pathname}</Typography> */}
+      <Typography>{pathname}</Typography>
 
       {pathname === "/toolpad/core/introduction" && <DoctorDashboardHomePage />}
 
@@ -218,8 +218,8 @@ function DemoPageContent({ pathname, router }) {
 
       {pathname === "/analytics" && <ComingSoon />}
 
-      {pathname === "/account/viewAccount" ||
-        (pathname === "/account" && (
+      {(pathname === "/account/viewAccount" ||
+        pathname === "/account") && (
           <>
             <Typography
               variant="h4"
@@ -231,7 +231,7 @@ function DemoPageContent({ pathname, router }) {
             <br />
             <DoctorAccountOverview />
           </>
-        ))}
+        )}
 
       {pathname === "/account/updateAccount" && (
         <>

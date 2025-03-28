@@ -178,8 +178,8 @@ const DemoPageContent = ({ pathname, router }) => {
         </>
       )}
 
-      {pathname === "/Account/viewProfile" ||
-        (pathname === "/Account" && (
+      {(pathname === "/Account/viewProfile" ||
+        pathname === "/Account") && (
           <>
             <Typography
               variant="h4"
@@ -191,7 +191,7 @@ const DemoPageContent = ({ pathname, router }) => {
             </Typography>
             <UserAccountOverview />
           </>
-        ))}
+        )}
 
       {pathname === "/Home" && (
         <>
