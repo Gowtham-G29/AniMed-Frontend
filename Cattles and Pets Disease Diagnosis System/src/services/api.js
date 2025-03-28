@@ -469,14 +469,17 @@ export const getUserDetails = async () => {
 
 export const getPrediction = async (formData) => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/predict", formData, {
+    const response = await axios.post("https://mobilenetv2-flask-backend.onrender.com/predict", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+
+    console.log(response);
 
     return response;
 
 
   } catch (error) {
+    console.log(error);
 
     throw new Error(error.response.message);
 
