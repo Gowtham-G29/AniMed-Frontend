@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Box, Typography, Modal, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import CoronavirusIcon from '@mui/icons-material/Coronavirus';
+import CoronavirusIcon from "@mui/icons-material/Coronavirus";
 
 export default function PredictionResultModal({
   prediction,
   predictionError,
   loading,
+  confidenceScore,
 }) {
   const [Open, setOpen] = useState(true);
 
@@ -35,7 +36,10 @@ export default function PredictionResultModal({
         }}
       >
         <div className="flex flex-col gap-5">
-          <Typography variant="h6"  className="font-bold text-slate-600">Predicted Disease<CoronavirusIcon color="secondary"/></Typography>
+          <Typography variant="h6" className="font-bold text-slate-600">
+            Predicted Disease
+            <CoronavirusIcon color="secondary" />
+          </Typography>
           <div>
             {loading ? (
               <span className="loading loading-bars loading-xl"></span>
@@ -55,7 +59,10 @@ export default function PredictionResultModal({
                     color="success.main"
                     fontWeight="bold"
                   >
-                    {prediction ? `${prediction}` : "Result ?"}
+                    <div className="flex flex-col gap-2">
+                      <div>{prediction ? `${prediction}` : "Result ?"}</div>
+                      <div>{Number(confidenceScore * 100).toFixed(2)} %</div>
+                    </div>
                   </Typography>
                 )}
               </>

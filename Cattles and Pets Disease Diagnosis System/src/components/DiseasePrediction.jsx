@@ -23,6 +23,7 @@ const ImageUploader = () => {
   const [file, setFile] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [confidenceScore,setConfidenceScore]=useState(0);
 
   // Handle file selection
   const handleFileChange = (event) => {
@@ -93,6 +94,7 @@ const ImageUploader = () => {
       setLoading(true);
       const response = await getPrediction(formData);
       setPrediction(response.data.prediction);
+      setConfidenceScore(response.data.confidence);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -201,6 +203,7 @@ const ImageUploader = () => {
               prediction={prediction}
               predictionError={predictionError}
               loading={loading}
+              confidenceScore={confidenceScore}
             />
           )}
         </div>
